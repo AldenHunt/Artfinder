@@ -9,7 +9,7 @@ def splash():
 # This is our main map page
 @app.route('/map')
 def map():
-    return "This will be a map..."
+    return render_template('mappage.html')
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
