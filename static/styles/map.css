@@ -2,11 +2,9 @@
 .navbar {
     overflow:hidden;
     background-color: teal;
-    position: fixed;
-    top: 0;
     width: 100vw;
     color: white;
-    padding: 100px;
+    height: 10vh;
 }
 
 body {
@@ -14,10 +12,8 @@ body {
     height: 100%;
 }
 
-
-
-html, body, #mapid {
-    height: 100vh;
+#mapid {
+    height: 90vh;
     width: 100vw;
 }
 h2 {
