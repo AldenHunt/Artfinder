@@ -1,27 +1,25 @@
-body {
-    background-color: #bffef4;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    }
 
 .navbar {
     overflow:hidden;
     background-color: teal;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
     color: white;
+    padding: 100px;
 }
 
-#mapid {
-    height: 200px;
+body {
+    background-color: white;
+    height: 100%;
+}
+
+
+
+html, body, #mapid {
+    height: 100vh;
+    width: 100vw;
 }
 h2 {
    color: whitesmoke; 
-}
-
-.footer {
-    position: fixed;
-    bottom: 0%
 }
