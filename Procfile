@@ -1,1 +1,1 @@
-web: gunicorn app:artfinder
+web: gunicorn artfinder:app
