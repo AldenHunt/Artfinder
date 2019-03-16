@@ -1,0 +1,27 @@
+body {
+    background-color: #bffef4;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    }
+
+.navbar {
+    overflow:hidden;
+    background-color: teal;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: white;
+}
+
+#mapid {
+    height: 200px;
+}
+h2 {
+   color: whitesmoke; 
+}
+
+.footer {
+    position: fixed;
+    bottom: 0%
+}
