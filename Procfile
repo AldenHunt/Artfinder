@@ -1,1 +1,1 @@
-web: python3 artfinder.py
+web: gunicorn app:artfinder
