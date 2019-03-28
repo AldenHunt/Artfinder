@@ -15,3 +15,5 @@ def map():
 @app.route('/objects/<int:obj_id>')
 def show_object_data(obj_id):
     return 'ID: %s' % obj_id
+
+
