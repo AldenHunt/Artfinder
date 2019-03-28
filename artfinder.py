@@ -1,5 +1,7 @@
 from flask import Flask, url_for, render_template, request, make_response
+from flask_sslify import SSLify
 app = Flask(__name__)
+sslify = SSLify(app)
 
 # This will be our splash page
 @app.route('/')
