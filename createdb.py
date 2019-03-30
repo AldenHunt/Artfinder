@@ -3,7 +3,22 @@
 # Rhea Braun
 
 # Added material and description columns, drop_table function March 29th - Sadie
-
+"""
+Creates a db entitled "artobjects.db" by importing information from an attached location csv and the Princeton Art Museum API.
+Creates the fllowing table and populates it:
+objects (
+objectid integer PRIMARY KEY,
+title text,
+creators text,
+dates text,
+description text,
+image text,
+medium text,
+dimensions text,
+lat real,
+long real
+);
+"""
 import csv
 from urllib.request import urlopen
 import json
