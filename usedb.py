@@ -17,8 +17,8 @@ def display_object_data(db_file, objectid):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
-	rows = cur.fetchall()
+	row = cur.fetchall()
 	#for row in rows:
 	#	print(row)
 	conn.close()
-	return rows
+	return row
