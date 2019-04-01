@@ -19,7 +19,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
-    L.circle(e.latlng, radius).addTo(mymap);
+    if (radius < 40) {
+        // Only print circle if pretty sure in the location panned to
+        L.circle(e.latlng, radius).addTo(mymap);
+    }
 }
 
 mymap.on('locationfound', onLocationFound);
