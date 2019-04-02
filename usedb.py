@@ -25,7 +25,7 @@ def display_object_data(db_file, objectid):
 	#for row in rows:
 	#	print(row)
 	conn.close()
-	return rows
+	return row
 	
 	
 def display_by_radius(db_file, lat, long, radius):
