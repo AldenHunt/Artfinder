@@ -20,6 +20,7 @@ def map():
 @app.route('/objects/<int:obj_id>')
 def show_object_data(obj_id):
     objdata = usedb.display_object_data('artobjects.db', obj_id)
+    print(objdata)
     return render_template('objects.html', objdata=objdata)
 
 

@@ -21,9 +21,7 @@ def display_object_data(db_file, objectid):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
-	row = cur.fetchall()
-	#for row in rows:
-	#	print(row)
+	row = cur.fetchone()
 	conn.close()
 	return row
 	
