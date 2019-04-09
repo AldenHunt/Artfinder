@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, request, make_response
+from flask import Flask, url_for, render_template, request, make_response, Markup
 from flask_sslify import SSLify
 import usedb
 

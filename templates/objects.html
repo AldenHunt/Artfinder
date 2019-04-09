@@ -7,18 +7,26 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/objects.css')}}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <!--link rel="stylesheet" type="text/css" href="main.css"-->
         <title>{{objdata[1]}}</title>
     </head>
     <body>
         <div class = "container-fluid">
+            <div class="row navbar">
+                <h2 style="color: whitesmoke">Princeton Artfinder</h2>
+            </div>  
             <div class="row">
-                <div class="col">
-                    <h1 id="splash">{{objdata[1]}}</h1>
-                    <p>{{objdata[4]}}</p>
-                    <p>{{objdata[3]}}</p>
+                <div class="col-sm-4">
+                    <img src={{objdata[5]}} alt={{objdata[1]}}>
+                </div>
+                <div class="col-sm-8">
+                    <h1>{{objdata[1]}}</h3> <!--Name of work-->
+                    <h4>{{objdata[2]}}</h4> <!--Artist-->
+                    <p>{{objdata[3]}}</p> <!--Time period-->
+                    <p><i>{{objdata[6]}}</i></p> <!--Medium-->
+                    <p>{{objdata[4] | safe}}</p> <!--Description/Notes-->
                 </div>
             </div>
             <div class="footer">
@@ -29,7 +37,7 @@
                     </small></p>
                 </div>
             </div>
-        </div>
+        </div>    
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         </script>

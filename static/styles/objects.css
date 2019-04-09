@@ -7,14 +7,15 @@
 }
 
 body {
-    background-color: white;
+    background-color: lightgray;
     height: 100%;
 }
 
-#mapid {
-    height: 90vh;
-    width: 100vw;
-}
 h2 {
    color: whitesmoke; 
+}
+
+.footer {
+    position: fixed;
+    bottom: 0%
 }
