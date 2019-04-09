@@ -8,7 +8,6 @@ def display_objects_table(db_file):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects")
-	r = {};
 	list = [];
 	for row in cur.fetchall():
 		r = dict((cur.description[i][0], val) for i, val in enumerate(row));
@@ -16,7 +15,6 @@ def display_objects_table(db_file):
 	#for row in rows:
 		#print(row)
 	conn.close()
-	list = json.dumps(list)
 	return list
 	
 def display_object_data(db_file, objectid):
