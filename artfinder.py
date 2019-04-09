@@ -15,7 +15,7 @@ def splash():
 def map():
     objects = usedb.display_objects_table('artobjects.db')
     print(objects)
-    return render_template('map.html', objects = objects)
+    return render_template('map.html', objects=objects)
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')

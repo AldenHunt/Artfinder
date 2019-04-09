@@ -32,8 +32,7 @@
         </div>
         <!-- This is a ginga generated variable of all database items passed from the database through our server. 
             Needs to go here- will not work if moved to map.js-->
-        <script type = "text/javascript">var objects = '{{objects|tojson}}'
-        objects = JSON.stringify(objects); </script> 
+        <script type = "text/javascript"> var objects = '{{objects|tojson}}' </script> 
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/map.js') }}"></script>
         <!-- Bootstrap JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
