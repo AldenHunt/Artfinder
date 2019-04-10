@@ -23,7 +23,7 @@ function onLocationFound(e) {
 }
 
 function addMarkers(){
-    
+    window.alert(objects);
     var objdata = JSON.parse(objects);
     window.alert(objdata);
     //JSON.parse(document.getElementById("#mydiv").data("objects"));
