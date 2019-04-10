@@ -1,5 +1,5 @@
 // Initial Leaflet javascript - get map and center on Princeton
-var corner1 = L.latLng(40.3520, -74.6475),
+var corner1 = L.latLng(40.3520, -74.647),
 corner2 = L.latLng(40.34, -74.664),
 bounds = L.latLngBounds(corner1, corner2);
 
@@ -43,23 +43,4 @@ mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
 mymap.locate({setView: true, enableHighAccuracy: true}); 
-    var radius = e.accuracy / 2;
-    L.circle(e.latlng, radius).addTo(mymap);
-}
 
-function addMarkers(){
-    window.alert(objects);
-    var objdata = JSON.parse(objects);
-
-    //JSON.parse(document.getElementById("#mydiv").data("objects"));
-
-
-    for (item in objdata) {
-        var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
-        var data = ("<b>" + objdata[item]["title"] + "</b><br>" + objdata[item]["creators"])
-        marker.bindPopup(data).openPopup()
-    }
-}
-
-mymap.on('locationfound', onLocationFound);
-addMarkers();
