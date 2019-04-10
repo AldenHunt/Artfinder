@@ -27,6 +27,7 @@ def json_object_data(db_file, objectid):
 	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
 	row = cur.fetchone()
 	print (row[0]);
+	print (type (row))
 	json_row = json.loads(row[0])
 	print (json_row)
 	conn.close()
@@ -35,9 +36,10 @@ def json_object_data(db_file, objectid):
 def json_objects_table(db_file):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
-	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) FROM (SELECT * FROM objects)")
+	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long)) AS json_result FROM (SELECT * FROM objects)")
 	rows = cur.fetchall()
-	print (rows)
+	json_string = rows[0][0]
+	json_object = json.loads(json_string)
 	conn.close()
-	return rows
+	return json_object
 	

@@ -30,7 +30,7 @@ function addMarkers(){
 
 
     for (item in objdata) {
-        L.marker([objdata["lat"], objdata["long"]]).addTo(mymap);
+        L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
     }
 }
 
