@@ -23,3 +23,7 @@ h2 {
 #pic {
     height: 90vh;
 }
+
+a {
+    text-decoration: none !important;
+}
