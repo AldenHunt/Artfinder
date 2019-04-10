@@ -3,8 +3,8 @@ var corner1 = L.latLng(40.3520, -74.647),
 corner2 = L.latLng(40.34, -74.664),
 bounds = L.latLngBounds(corner1, corner2);
 
-var mymap = L.map('mapid', {maxBounds: bounds,}).setView([40.3474, -74.6581], 18);
-mymap.locate({setView: true, maxZoom: 19, enableHighAccuracy: true});
+var mymap = L.map('mapid', {maxBounds: bounds, minZoom: 15, maxZoom: 19}).setView([40.3474, -74.6581], 18);
+mymap.locate({setView: true, enableHighAccuracy: true});
 
 /* We're currently getting our tiles (the actual map rendering) from
 Mapbox. If this app ever gets big, we really should change providers
@@ -23,7 +23,6 @@ function onLocationFound(e) {
     // Only print circle if pretty sure in the location panned to
     if (radius < 50) {
         L.circle(e.latlng, radius).addTo(mymap);
-        alert("Fully located!");
     }
     else {
         mymap.setView([40.3474, -74.6581], 18);
@@ -33,7 +32,7 @@ function onLocationFound(e) {
 mymap.on('locationfound', onLocationFound);
 
 function onLocationError(e) {
-    alert(e.message);
+    mymap.setView([40.3474, -74.6581], 18);
 }
 
 map.on('locationerror', onLocationError);

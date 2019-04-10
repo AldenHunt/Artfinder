@@ -19,3 +19,7 @@ h2 {
     position: fixed;
     bottom: 0%
 }
+
+#pic {
+    height: 90vh;
+}
