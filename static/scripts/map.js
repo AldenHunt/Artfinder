@@ -30,7 +30,9 @@ function addMarkers(){
 
 
     for (item in objdata) {
-        L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
+        var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
+        var data = ("<b>" + objdata[item]["title"] + "</b><br>" + objdata[item]["creators"])
+        marker.bindPopup(data).openPopup()
     }
 }
 
