@@ -9,32 +9,35 @@ def display_objects_table(db_file):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects")
-	list = [];
-	for row in cur.fetchall():
-		r = dict((cur.description[i][0], val) for i, val in enumerate(row));
-		list.append(r);
-	#for row in rows:
-		#print(row)
+	rows = cur.fetchall()
 	conn.close()
-	return list
+	return rows
 	
 def display_object_data(db_file, objectid):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
-	##rows = cur.fetchall()
-	#for row in rows:
-	#	print(row)
+	row = cur.fetchone()
 	conn.close()
-	##return rows
+	return row
 
 def json_object_data(db_file, objectid):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
 	row = cur.fetchone()
-	print row[0];
+	print (row[0]);
+	json_row = json.loads(row[0])
+	print (json_row)
 	conn.close()
-	return row[0]
+	return json_row
 
+def json_objects_table(db_file):
+	conn = sqlite3.connect(db_file)
+	cur = conn.cursor()
+	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) FROM (SELECT * FROM objects)")
+	rows = cur.fetchall()
+	print (rows)
+	conn.close()
+	return rows
 	

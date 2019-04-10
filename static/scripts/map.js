@@ -25,12 +25,13 @@ function onLocationFound(e) {
 function addMarkers(){
     window.alert(objects);
     var objdata = JSON.parse(objects);
-    window.alert(objdata);
+
     //JSON.parse(document.getElementById("#mydiv").data("objects"));
 
-    for (item in objdata)
-        L.marker([parseInt(objdata[item]["lat"]), parseInt(objdata[item]["long"])]).addTo(mymap);
-    
+
+    for (item in objdata) {
+        L.marker([objdata["lat"], objdata["long"]]).addTo(mymap);
+    }
 }
 
 mymap.on('locationfound', onLocationFound);

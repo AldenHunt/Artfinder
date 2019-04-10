@@ -13,7 +13,7 @@ def splash():
 # This is our main map page
 @app.route('/map', methods = ['GET'])
 def map():
-    objects = usedb.display_objects_table('artobjects.db')
+    objects = usedb.json_object_data('artobjects.db', 30593)
     print(objects)
     return render_template('map.html', objects=objects)
 
