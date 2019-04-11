@@ -19,28 +19,40 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
-    console.log("Location worked");
     var radius = e.accuracy/2;
-    console.log("Radius: " + radius);
     // Only print circle if pretty sure in the location panned to
-    if (radius < 50) {
-        
+    if (radius < 50) {    
         L.circle(e.latlng, radius).addTo(mymap);
     }
     else {
-        console.log("Setting view back");
         mymap.flyTo([40.3474, -74.6581], 18);
-        console.log("Did the fly");
     }
 }
 
+//If error, note in console
 function onLocationError(e) {
-    console.log("Location failed");
+    console.log("Error: Location failed");
     mymap.flyTo([40.3474, -74.6581], 18);
 }
 
 mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
-mymap.locate({setView: true, enableHighAccuracy: true}); 
+/* Automatically locates the user and sets the view to their location) */
+mymap.locate({setView: true, enableHighAccuracy: true});
 
+function addMarkers(){
+    var objdata = JSON.parse(objects);
+
+    //JSON.parse(document.getElementById("#mydiv").data("objects"));
+    for (item in objdata) {
+        var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
+        var title = objdata[item]["title"];
+        var creators = objdata[item]["creators"];
+        var link = objdata[item]["objectid"];
+        var data = ("<b>" + "<a href=objects/" + link + ">" + title + "</a>" + "</b><br>" + creators);
+        marker.bindPopup(data).openPopup();
+    }
+}
+
+addMarkers();

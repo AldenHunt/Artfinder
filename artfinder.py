@@ -14,13 +14,13 @@ def splash():
 # This is our main map page
 @app.route('/map')
 def map():
-    return render_template('map.html')
+    objects = usedb.json_objects_table('artobjects.db')
+    return render_template('map.html', objects=objects)
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
 def show_object_data(obj_id):
     objdata = usedb.display_object_data('artobjects.db', obj_id)
-    print(objdata)
     return render_template('objects.html', objdata=objdata)
 
 
