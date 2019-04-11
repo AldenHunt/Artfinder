@@ -41,10 +41,11 @@ mymap.on('locationerror', onLocationError);
 /* Automatically locates the user and sets the view to their location) */
 mymap.locate({setView: true, enableHighAccuracy: true});
 
+/* Adds markers for all objects to map, with popup displaying information. */
 function addMarkers(){
+    /* objects is passed from server to map.html with jinja2. */
     var objdata = JSON.parse(objects);
 
-    //JSON.parse(document.getElementById("#mydiv").data("objects"));
     for (item in objdata) {
         var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
         var title = objdata[item]["title"];
