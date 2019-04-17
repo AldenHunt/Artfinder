@@ -1,14 +1,10 @@
 .navbar {
-    overflow:hidden;
-    background-color: teal;
-    width: 100vw;
-    color: white;
-    height: 10vh;
+    background-color: black;
+    color: whitesmoke;
 }
 
 body {
     background-color: lightgray;
-    height: 100%;
 }
 
 h2 {
@@ -16,12 +12,7 @@ h2 {
 }
 
 .footer {
-    position: fixed;
-    bottom: 0%
-}
-
-#pic {
-    height: 90vh;
+    background-color: darkgray;
 }
 
 a {

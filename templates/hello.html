@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -12,24 +12,29 @@
         <!--link rel="stylesheet" type="text/css" href="main.css"-->
         <title>Princeton Artfinder</title>
     </head>
-    <body>
-        <div class = "container-fluid">
-            <div class="row">
-                <div class="col">
-                    <h1 id="splash">Princeton Artfinder</h1>
-                    <p>A user-friendly way to find art around Princeton's campus</p>
-                    <a href="map" class="btn btn-light" role="button" >Go To the Map</a>
+    <body class="d-flex flex-column h-100">
+        <main role="main">
+            <div class="container h-100">
+                <div class="row h-25"></div>
+                <div class="row h-75 align-items-center justify-content-center text-center">
+                    <div id="splash" class="col-md-6">
+                        <div id="splashtext">
+                            <h1><large>Princeton Artfinder</large></h1>
+                            <p>A user-friendly way to find art around Princeton's campus</p>
+                            <a href="map" class="btn btn-light" role="button" >Go To the Map</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="footer">
-                <div class="col">
-                    <p><small>Princeton Artfinder is currently developed by Alden Hunt,
+            </div>    
+        </main>
+        
+        <footer class="footer mt-auto py-3">
+                <div class="container">
+                    <small>Princeton Artfinder is currently developed by Alden Hunt,
                         Rhea Braun, Sadie Van Vranken, and Tommy Martinson. 
-                        <a href="mailto:achunt@princeton.edu">Questions or Suggestions?</a>
-                    </small></p>
+                        <a href="mailto:achunt@princeton.edu">Questions or Suggestions?</a></small>
                 </div>
-            </div>
-        </div>
+        </footer>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         </script>
