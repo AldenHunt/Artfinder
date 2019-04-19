@@ -1,6 +1,6 @@
 // Initial Leaflet javascript - get map and center on Princeton
-var corner1 = L.latLng(40.3520, -74.647),
-corner2 = L.latLng(40.34, -74.664),
+var corner1 = L.latLng(40.354, -74.645),
+corner2 = L.latLng(40.334, -74.672),
 bounds = L.latLngBounds(corner1, corner2);
 
 var mymap = L.map('mapid', {maxBounds: bounds, minZoom: 15, maxZoom: 19}).setView([40.3474, -74.6581], 17);

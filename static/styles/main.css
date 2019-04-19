@@ -1,12 +1,30 @@
 body {
-    background-color: #bffef4;
+    background-color: #fff8ee;
     text-align: center;
+    background-image: url("http://princetonfound.com/wp-content/uploads/2015/11/IMG_0484.jpg");
+  height: 100vh; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
     }
 #splash {
-    padding: 100px 0;
+    justify-content: center;
+    align-items: center;
+    background-color: coral;
+    background: rgba(255,127,80, 0.9);
+    padding: 5%;
+}
+
+#splashtext {
+    opacity: 1;
+}
+
+main {
+    color: whitesmoke;
 }
 
 .footer {
-    position: fixed;
-    bottom: 0%
+    background-color: black;
+    color: whitesmoke;
 }
+

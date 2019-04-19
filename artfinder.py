@@ -2,7 +2,6 @@ from flask import Flask, url_for, render_template, request, make_response, Marku
 from flask_sslify import SSLify
 import usedb
 
-
 app = Flask(__name__)
 sslify = SSLify(app)
 
@@ -12,7 +11,7 @@ def splash():
     return render_template('hello.html')
 
 # This is our main map page
-@app.route('/map')
+@app.route('/map', methods = ['GET'])
 def map():
     objects = usedb.json_objects_table('artobjects.db')
     return render_template('map.html', objects=objects)

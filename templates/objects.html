@@ -1,46 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/objects.css')}}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <!--link rel="stylesheet" type="text/css" href="main.css"-->
         <title>{{objdata[1]}}</title>
+
     </head>
-    <body>
-        <div class = "container-fluid">
-            <div class="row navbar">
-                <a href="/map"><h2 style="color: whitesmoke">Princeton Artfinder</h2></a>
-            </div>  
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src={{objdata[5]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" max-width=100% class="img-fluid" height=auto>
-                </div>
-                <div class="col-sm-8">
-                    <h1>{{objdata[1]}}</h3> <!--Name of work-->
-                    <h4>{{objdata[2]}}</h4> <!--Artist-->
-                    <p>{{objdata[3]}}</p> <!--Time period-->
-                    <p><i>{{objdata[6]}}</i></p> <!--Medium-->
-                    <p>{{objdata[4] | safe}}</p> <!--Description/Notes-->
+    <body class="d-flex flex-column h-100">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark">
+                <a class="navbar-brand" href="/map"><h2>Princeton Artfinder</h2></a>
+            </nav>
+        </header>
+         
+        <main role="main">
+            <div class ="container-fluid"> 
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src={{objdata[5]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" max-width=100% class="img-fluid" height=auto>
+                    </div>
+                    <div class="col-md-8">
+                        <h1>{{objdata[1]}}</h3> <!--Name of work-->
+                        <h4>{{objdata[2]}}</h4> <!--Artist-->
+                        <p>{{objdata[3]}}</p> <!--Time period-->
+                        <p><i>{{objdata[6]}}</i></p> <!--Medium-->
+                        <p>{{objdata[4] | safe}}</p> <!--Description/Notes-->
+                    </div>
                 </div>
             </div>
-            <div class="row footer">
-                <div class="col">
-                    <p><small>Princeton Artfinder is currently developed by Alden Hunt,
+        </main>
+        
+        <footer class="footer mt-auto py-3">
+                <div class="container">
+                    <small>Princeton Artfinder is currently developed by Alden Hunt,
                         Rhea Braun, Sadie Van Vranken, and Tommy Martinson. 
-                        <a href="mailto:achunt@princeton.edu">Questions or Suggestions?</a>
-                    </small></p>
+                        <a href="mailto:achunt@princeton.edu">Questions or Suggestions?</a></small>
                 </div>
-            </div>
-        </div>    
+        </footer>
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        </script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
