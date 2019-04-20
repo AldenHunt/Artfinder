@@ -34,13 +34,16 @@ function onLocationFound(e) {
             data: data,
             success: function(data){
                 data = JSON.parse(data)
+                $('#locationHeader').append('We\'ve found the top 5 closest art pieces to you');
                 for (item in data) {
                     var title = data[item]["title"];
                     var creators = data[item]["creators"];
-                    var dist = data[item]["dist"];
+                    var dist = Math.round(data[item]["dist"]);
+                    var link = data[item]["objectid"]
                     var position = Number(item) + 1;
-                    $('#sideLocate').append(position + ". " + title + "<br>");
-                    $('#sideLocate').append(creators + "<br>" + dist + "<br>");
+                    link = "<a href=objects/" + link + ">"
+                    $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
+                    $('#sideLocate').append(creators + "<br>" + dist + " feet<br>");
                 }
             }
         })
