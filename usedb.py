@@ -40,6 +40,12 @@ def json_objects_table(db_file):
 	conn.close()
 	return json_object
 	
+def dist_ltf(lat, long, rlat, rlong):
+	lat2ft = 353760
+	long2ft = 278842
+	dist = math.sqrt(((lat - rlat)*lat2ft)**2 + ((long - rlong)*long2ft)**2)
+	return dist
+	
 def display_by_radius(db_file, lat, long, radius):
 	''' Returns a list of objects from database db_file within a radius of radius centered on lat long.'''
 	conn = sqlite3.connect(db_file)
@@ -52,7 +58,7 @@ def display_by_radius(db_file, lat, long, radius):
 	for row in rows:
 		rlat = float(row[8])
 		rlong = float(row[9])
-		dist = math.sqrt((lat - rlat)**2 + (long - rlong)**2)
+		dist = dist_ltf(lat, long, rlat, rlong)
 		if dist <= radius:
 			r = dict((cur.description[i][0], val) for i, val in enumerate(row));
 			results.append(r);
@@ -73,7 +79,7 @@ def display_objects_location(db_file, lat, long, n):
 	for row in rows:
 		rlat = float(row[8])
 		rlong = float(row[9])
-		dist = math.sqrt((lat - rlat)**2 + (long - rlong)**2)
+		dist = dist_ltf(lat, long, rlat, rlong)
 		unsorted[row[0]] = dist
 	sortedr = sorted(unsorted.items(), key=operator.itemgetter(1))
 	for j in range(n):
