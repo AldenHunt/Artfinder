@@ -23,6 +23,27 @@ function onLocationFound(e) {
     // Only print circle if pretty sure in the location panned to
     if (radius < 50) {    
         L.circle(e.latlng, radius).addTo(mymap);
+        var data = {
+            lat: e.latlng.lat.toString(),
+            lng: e.latlng.lng.toString()
+        }
+        // send location to server, returns info for 5 closest art pieces
+        $.ajax({
+            type: 'POST',
+            url: '/map',
+            data: data,
+            success: function(data){
+                data = JSON.parse(data)
+                for (item in data) {
+                    var title = data[item]["title"];
+                    var creators = data[item]["creators"];
+                    var dist = data[item]["dist"];
+                    var position = Number(item) + 1;
+                    $('#sideLocate').append(position + ". " + title + "<br>");
+                    $('#sideLocate').append(creators + "<br>" + dist + "<br>");
+                }
+            }
+        })
     }
     else {
         mymap.flyTo([40.3474, -74.6581], 18);
