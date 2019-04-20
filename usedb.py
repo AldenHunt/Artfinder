@@ -82,7 +82,7 @@ def display_objects_location(db_file, lat, long, n):
 	rows = cur.fetchall()
 	unsorted = {}
 	r = {}
-	results = []
+	results = ''
 	i = 0
 	for row in rows:
 		rlat = float(row[8])
@@ -92,9 +92,12 @@ def display_objects_location(db_file, lat, long, n):
 	sortedr = sorted(unsorted.items(), key=operator.itemgetter(1))
 	for j in range(n):
 		objid = sortedr[j][0]
-		cur.execute("SELECT * FROM objects WHERE objectid=?", (objid,))
-		r = dict((cur.description[i][0], val) for i, val in enumerate(cur.fetchall()[0]));
-		results.append(r);
+		cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators)) AS json_result FROM (SELECT * FROM objects WHERE objectid=?", (objid,))
+		rows = cur.fetchall()
+		json_string = rows[0][0]
+		#cur.execute("SELECT * FROM objects WHERE objectid=?", (objid,))
+		#r = dict((cur.description[i][0], val) for i, val in enumerate(cur.fetchall()[0]));
+		results.append(json_string);
+	json_object = json.loads(json_string)
 	conn.close()
-	results = json.dumps(results)
-	return results
+	return json_object
