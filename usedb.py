@@ -82,8 +82,8 @@ def display_objects_location(db_file, lat, long, n):
 		rows = cur.fetchall()
 		json_string = rows[0][0]
 		json_object = json.loads(json_string)
-		print (sortedr[j][1])
-		json_object[0]['dist'] = sortedr[j][1]
+		distance = sortedr[j][1]
+		json_object[0]['dist'] = distance
 		#cur.execute("SELECT * FROM objects WHERE objectid=?", (objid,))
 		#r = dict((cur.description[i][0], val) for i, val in enumerate(cur.fetchall()[0]));
 		results = results + json_object
