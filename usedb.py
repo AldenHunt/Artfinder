@@ -25,12 +25,34 @@ def display_object_data(db_file, objectid):
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
-	rows = cur.fetchall()
-	#for row in rows:
-	#	print(row)
+	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
+	row = cur.fetchone()
 	conn.close()
-	return rows
+	return row
 
+def json_object_data(db_file, objectid):
+	''' Returns an object with objectid as its object id from database db_file in json format.'''
+	conn = sqlite3.connect(db_file)
+	cur = conn.cursor()
+	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
+	row = cur.fetchone()
+	print (row[0]);
+	print (type (row))
+	json_row = json.loads(row[0])
+	print (json_row)
+	conn.close()
+	return json_row
+
+def json_objects_table(db_file):
+	''' Displays all objects in the objects table of the db in the argument, printing them out and returning them as a list of lists.'''
+	conn = sqlite3.connect(db_file)
+	cur = conn.cursor()
+	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators)) AS json_result FROM (SELECT * FROM objects)")
+	rows = cur.fetchall()
+	json_string = rows[0][0]
+	json_object = json.loads(json_string)
+	conn.close()
+	return json_object
 
 def display_by_radius(db_file, lat, long, radius):
 	''' Returns a list of objects from database db_file within a radius of radius centered on lat long.'''
