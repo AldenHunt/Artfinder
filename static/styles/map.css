@@ -1,9 +1,6 @@
 .navbar {
-    overflow:hidden;
     background-color:black;
-    width: 100vw;
     color: white;
-    height: 10vh;
 }
 
 body {
@@ -12,8 +9,8 @@ body {
 }
 
 #mapid {
-    height: 90vh;
     width: 100vw;
+    height: 100vh;
 }
 h2 {
    color: whitesmoke; 
