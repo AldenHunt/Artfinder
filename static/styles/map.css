@@ -22,3 +22,19 @@ h2 {
 a {
     text-decoration: none !important;
 }
+
+div.col {
+    width: 150px;
+}
+
+#title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-height: 15px;        /* fallback */
+    max-height: 30px;       /* fallback */
+ }
+      
+  

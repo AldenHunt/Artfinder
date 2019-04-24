@@ -50,7 +50,8 @@ function addMarkers(){
         var title = objdata[item]["title"];
         var creators = objdata[item]["creators"];
         var link = objdata[item]["objectid"];
-        var data = ("<b>" + "<a href=objects/" + link + ">" + title + "</a>" + "</b><br>" + creators);
+        var imgURI = objdata[item]["image"];
+        var data = ("<div class='row'><div class='col'><img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
         marker.bindPopup(data).openPopup();
     }
 }
