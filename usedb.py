@@ -36,10 +36,7 @@ def json_object_data(db_file, objectid):
 	cur = conn.cursor()
 	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
 	row = cur.fetchone()
-	print (row[0]);
-	print (type (row))
 	json_row = json.loads(row[0])
-	print (json_row)
 	conn.close()
 	return json_row
 
@@ -53,7 +50,13 @@ def json_objects_table(db_file):
 	json_object = json.loads(json_string)
 	conn.close()
 	return json_object
-
+	
+def dist_ltf(lat, long, rlat, rlong):
+	lat2ft = 353760
+	long2ft = 278842
+	dist = math.sqrt(((lat - rlat)*lat2ft)**2 + ((long - rlong)*long2ft)**2)
+	return dist
+	
 def display_by_radius(db_file, lat, long, radius):
 	''' Returns a list of objects from database db_file within a radius of radius centered on lat long.'''
 	conn = sqlite3.connect(db_file)
@@ -66,7 +69,7 @@ def display_by_radius(db_file, lat, long, radius):
 	for row in rows:
 		rlat = float(row[8])
 		rlong = float(row[9])
-		dist = math.sqrt((lat - rlat)**2 + (long - rlong)**2)
+		dist = dist_ltf(lat, long, rlat, rlong)
 		if dist <= radius:
 			r = dict((cur.description[i][0], val) for i, val in enumerate(row));
 			results.append(r);
@@ -82,22 +85,26 @@ def display_objects_location(db_file, lat, long, n):
 	rows = cur.fetchall()
 	unsorted = {}
 	r = {}
-	results = ''
+	results = []
 	i = 0
 	for row in rows:
 		rlat = float(row[8])
 		rlong = float(row[9])
-		dist = math.sqrt((lat - rlat)**2 + (long - rlong)**2)
+		dist = dist_ltf(lat, long, rlat, rlong)
 		unsorted[row[0]] = dist
 	sortedr = sorted(unsorted.items(), key=operator.itemgetter(1))
 	for j in range(n):
 		objid = sortedr[j][0]
-		cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators)) AS json_result FROM (SELECT * FROM objects WHERE objectid=?", (objid,))
+		cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators)) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objid,))
 		rows = cur.fetchall()
 		json_string = rows[0][0]
+		json_object = json.loads(json_string)
+		distance = sortedr[j][1]
+		json_object[0]['dist'] = distance
 		#cur.execute("SELECT * FROM objects WHERE objectid=?", (objid,))
 		#r = dict((cur.description[i][0], val) for i, val in enumerate(cur.fetchall()[0]));
-		results.append(json_string);
-	json_object = json.loads(json_string)
+		results = results + json_object
 	conn.close()
-	return json_object
+	results = json.dumps(results)
+	return results
+	

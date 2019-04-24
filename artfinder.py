@@ -11,10 +11,18 @@ def splash():
     return render_template('hello.html')
 
 # This is our main map page
-@app.route('/map', methods = ['GET'])
+@app.route('/map', methods = ['GET', 'POST'])
 def map():
-    objects = usedb.json_objects_table('artobjects.db')
-    return render_template('map.html', objects=objects)
+    if request.method == 'GET':
+        objects = usedb.json_objects_table('artobjects.db')
+        return render_template('map.html', objects=objects)
+    elif request.method == 'POST':
+        lat = float(request.form.get('lat'))
+        lng = float(request.form.get('lng'))
+        closestObjects = usedb.display_objects_location('artobjects.db', lat, lng, 5)
+        return closestObjects
+
+   
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')

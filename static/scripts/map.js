@@ -23,6 +23,30 @@ function onLocationFound(e) {
     // Only print circle if pretty sure in the location panned to
     if (radius < 50) {    
         L.circle(e.latlng, radius).addTo(mymap);
+        var data = {
+            lat: e.latlng.lat.toString(),
+            lng: e.latlng.lng.toString()
+        }
+        // send location to server, returns info for 5 closest art pieces
+        $.ajax({
+            type: 'POST',
+            url: '/map',
+            data: data,
+            success: function(data){
+                data = JSON.parse(data)
+                $('#locationHeader').append('We\'ve found the top 5 closest art pieces to you');
+                for (item in data) {
+                    var title = data[item]["title"];
+                    var creators = data[item]["creators"];
+                    var dist = Math.round(data[item]["dist"]);
+                    var link = data[item]["objectid"]
+                    var position = Number(item) + 1;
+                    link = "<a href=objects/" + link + ">"
+                    $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
+                    $('#sideLocate').append(creators + "<br>" + dist + " feet<br>");
+                }
+            }
+        })
     }
     else {
         mymap.flyTo([40.3474, -74.6581], 18);
@@ -41,10 +65,11 @@ mymap.on('locationerror', onLocationError);
 /* Automatically locates the user and sets the view to their location) */
 mymap.locate({setView: true, enableHighAccuracy: true});
 
+/* Adds markers for all objects to map, with popup displaying information. */
 function addMarkers(){
+    /* objects is passed from server to map.html with jinja2. */
     var objdata = JSON.parse(objects);
 
-    //JSON.parse(document.getElementById("#mydiv").data("objects"));
     for (item in objdata) {
         var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
         var title = objdata[item]["title"];
