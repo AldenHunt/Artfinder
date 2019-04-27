@@ -12,16 +12,27 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+#nearesttoggle {
+    position: relative;
+    right: 5;
+    top: 5;
+    z-index: 1000;
+}
+
+#nearest {
+    background: rgb(160,160,160);
+}
+
+.row {
+    position: absolute;
+}
 h2 {
    color: whitesmoke; 
 }
 
 a {
-    text-decoration: none !important;
-}
-
-div.col {
-    width: 150px;
+    text-decoration: none !important; /* Stops navbar title from being underlined */
 }
 
 #title {

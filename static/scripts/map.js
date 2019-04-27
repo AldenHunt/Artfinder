@@ -20,9 +20,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
     var radius = e.accuracy/2;
+    console.log(radius);
     // Only print circle if pretty sure in the location panned to 
-    if (radius > 100) {
-        alert("Location may not be accurate on devices without GPS functionality")
+    if (radius > 175) {
+        alert("Location may not be accurate on devices without GPS functionality");
     }
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
@@ -54,7 +55,7 @@ function onLocationFound(e) {
 //If error, note in console
 function onLocationError(e) {
     console.log("Error: Location failed");
-    mymap.flyTo([40.3474, -74.6581], 18);
+    mymap.flyTo([40.3474, -74.6581], 17);
 }
 
 mymap.on('locationfound', onLocationFound);
@@ -75,7 +76,7 @@ function addMarkers(){
         var link = objdata[item]["objectid"];
         var imgURI = objdata[item]["image"];
         var data = ("<div class='row'><div class='col'><img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
-        marker.bindPopup(data).openPopup();
+        marker.bindPopup(data);
     }
 }
 
