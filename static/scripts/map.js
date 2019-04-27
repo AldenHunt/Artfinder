@@ -22,8 +22,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
     var radius = e.accuracy/2;
-    // Only print circle if pretty sure in the location panned to
-    if (radius < 50) {    
+    if (radius > 100) {
+        alert("Location may not be accurate on devices without GPS functionality")
+    } 
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
             lat: e.latlng.lat.toString(),
@@ -49,11 +50,6 @@ function onLocationFound(e) {
                 }
             }
         })
-    }
-    // if accuracy not high enough, default to location of Princeton University Art Museum
-    else {
-        sideBarNoLocation();
-    }
 
 }
 
@@ -98,7 +94,8 @@ mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
 /* Automatically locates the user and sets the view to their location) */
-mymap.locate({setView: true, enableHighAccuracy: true});
+/* Automatically locates the user and sets the view to their location) */
+mymap.locate({setView: true, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
 
 /* Adds markers for all objects to map, with popup displaying information. */
 function addMarkers(){
