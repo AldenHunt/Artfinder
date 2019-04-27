@@ -119,8 +119,8 @@ def objects_search(db_file, string):
 	
 def json_search(db_file, string):
 	hits = objects_search(db_file, string)
-	print(hits)
+	result = ''
 	for objid in hits:
-		print(objid[0])
-		json_object_data(db_file, objid[0])
+		result += json_object_data(db_file, objid[0])
+	return json.dumps(result)
 	
