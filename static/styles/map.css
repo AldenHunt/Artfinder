@@ -6,6 +6,7 @@
 body {
     background-color: white;
     height: 100%;
+    font-family: 'Quicksand', sans-serif;
 }
 
 #mapid {
@@ -33,5 +34,17 @@ div.col {
     line-height: 15px;        /* fallback */
     max-height: 30px;       /* fallback */
  }
+
+ #locationHeader {
+    background-color: coral;
+    margin-top: 0.67em;
+    text-align: center;
+    padding: 1em;
+    color: whitesmoke;
+    font-size: 1.5em;
+    font-weight: bold;
+    
+ }
+
       
   

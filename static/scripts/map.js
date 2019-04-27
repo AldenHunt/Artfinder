@@ -38,16 +38,20 @@ function onLocationFound(e) {
             data: data,
             success: function(data){
                 data = JSON.parse(data)
-                $('#locationHeader').append('We\'ve found the top 5 closest art pieces to you');
+                $('#locationHeader').html('Closest art pieces to you');
                 for (item in data) {
                     var title = data[item]["title"];
                     var creators = data[item]["creators"];
                     var dist = Math.round(data[item]["dist"]);
                     var link = data[item]["objectid"]
+                    var imgURI = data[item]["image"];
                     var position = Number(item) + 1;
+                    var htmlTextId = '#sideLocate' + position;
+                    var htmlImageId = '#sideLocateImage' + position;
                     link = "<a href=objects/" + link + ">"
-                    $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
-                    $('#sideLocate').append(creators + "<br>" + dist + " feet<br>");
+                    $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                    $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
+                    $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
                 }
             }
         })
@@ -74,7 +78,7 @@ function sideBarNoLocation(){
         data: data,
         success: function(data){
             data = JSON.parse(data)
-            $('#locationHeader').append('We can\'t find your exact location. Here are objects close to the Princeton University Art Museum');
+            $('#locationHeader').html('We can\'t find your exact location. Here are objects close to the Princeton University Art Museum');
             for (item in data) {
                 var title = data[item]["title"];
                 var creators = data[item]["creators"];

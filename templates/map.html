@@ -18,6 +18,8 @@
         <!-- Our CSS-->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/map.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <!--link rel="stylesheet" type="text/css" href="map.css"-->
         <title>Princeton Artfinder - Map</title>
     </head>
@@ -40,9 +42,31 @@
         <div class="container-fluid">
             <div class="row">
                     <div id="mapid" class="col-12 col-md-8"></div>
-                    <div class="col-4 col-md-4">
-                        <h1 id="locationHeader"></h1>
-                        <p id="sideLocate"></p>
+                    <div id="sideBar" class="col-4 col-md-4">
+                        <h1 id="locationHeader">
+                            Using location to search for art...
+                        </h1>
+                        <div class ="row">
+                            <div id = "sideLocate1" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage1" class = "col-4 col-md-4"></div>
+                        </div>
+                        <div class ="row">
+                            <div id = "sideLocate2" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage2" class = "col-4 col-md-4"></div>
+                        </div>
+                        <div class ="row">
+                            <div id = "sideLocate3" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage3" class = "col-4 col-md-4"></div>
+                        </div>
+                        <div class ="row">
+                            <div id = "sideLocate4" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage4" class = "col-4 col-md-4"></div>
+                        </div>
+                        <div class ="row">
+                            <div id = "sideLocate5" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage5" class = "col-4 col-md-4"></div> 
+                        </div>
+                        
                     </div>
             </div>
         </div>
