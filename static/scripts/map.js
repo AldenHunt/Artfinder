@@ -72,7 +72,7 @@ function sideBarNoLocation(){
     var data = {
         lat: defaultLat.toString(),
         lng: defaultLng.toString()
-    }
+    };
     $.ajax({
         type: 'POST',
         url: '/map',
@@ -83,12 +83,16 @@ function sideBarNoLocation(){
             for (item in data) {
                 var title = data[item]["title"];
                 var creators = data[item]["creators"];
-                var dist = Math.round(data[item]["dist"]);
                 var link = data[item]["objectid"]
                 var position = Number(item) + 1;
                 link = "<a href=objects/" + link + ">"
-                $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
-                $('#sideLocate').append(creators + "<br>");
+                var imgURI = data[item]["image"];
+                var htmlTextId = '#sideLocate' + position;
+                var htmlImageId = '#sideLocateImage' + position;
+                link = "<a href=objects/" + link + ">"
+                $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
+                $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
         }
     })
@@ -121,13 +125,18 @@ function addMarkers(){
 addMarkers();
 
 var nearestButton = document.getElementById("nearesttoggle")
-nearestButton.style.display= "none";
+$('#nearesttoggle').hide()
 
-$('#dismiss').on('click', function() {
-    nearestButton.style.display = "block";
-    mymap.redraw()
+$('#dismiss').on("click", function() {
+    $('#nearesttoggle').show()
+    $('#nearest').toggleClass('active');
+})
+
+$(".collapse").on("hidden.bs.collapse", function () {
+    mymap.redraw();
 })
 
 $('#nearesttoggle').on('click', function() {
-    nearestButton.style.display = "none";
+    nearestButton.style.display = "none"
+    $('#nearest').toggleClass('active');
 })
