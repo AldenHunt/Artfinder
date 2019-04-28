@@ -1,6 +1,6 @@
 // Initial Leaflet javascript - get map and center on Princeton
-var corner1 = L.latLng(40.354, -74.645),
-corner2 = L.latLng(40.334, -74.672),
+var corner1 = L.latLng(40.36, -74.64),
+corner2 = L.latLng(40.33, -74.68),
 bounds = L.latLngBounds(corner1, corner2);
 
 //map flies to these coordinates if location does not work or not turned on
@@ -22,9 +22,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
     var radius = e.accuracy/2;
+    console.log(radius);
     // Only print circle if pretty sure in the location panned to 
-    if (radius > 100) {
-        alert("Location may not be accurate on devices without GPS functionality")
+    if (radius > 175) {
+        alert("Location may not be accurate on devices without GPS functionality");
     }
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
@@ -113,7 +114,7 @@ function addMarkers(){
         var link = objdata[item]["objectid"];
         var imgURI = objdata[item]["image"];
         var data = ("<div class='row'><div class='col'><img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
-        marker.bindPopup(data).openPopup();
+        marker.bindPopup(data);
     }
 }
 
