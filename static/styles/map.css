@@ -13,6 +13,7 @@ body {
     display: flex;
     width: 100%;
     align-items: stretch;
+    position: relative;
 }
 
 #mapid {
@@ -34,10 +35,10 @@ body {
 
 #nearest {
     background:  lightgrey;
-    /*position: absolute;
+    position: absolute;
     right: 5px;
-    top: 40px;  
-    padding: 0px; */
+    top: 10px;  
+    padding: 0px;
     width: 350px;
     z-index: 25000;
 } 
