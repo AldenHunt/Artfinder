@@ -132,8 +132,8 @@ $('#dismiss').on("click", function() {
     $('#nearest').toggleClass('active');
 })
 
-$(".collapse").on("hidden.bs.collapse", function () {
-    mymap.redraw();
+$('#dismiss').on('click', function() {
+    nearestButton.style.display = "block";
 })
 
 $('#nearesttoggle').on('click', function() {
