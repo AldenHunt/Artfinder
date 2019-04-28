@@ -119,3 +119,15 @@ function addMarkers(){
 }
 
 addMarkers();
+
+var nearestButton = document.getElementById("nearesttoggle")
+nearestButton.style.display= "none";
+
+$('#dismiss').on('click', function() {
+    nearestButton.style.display = "block";
+    mymap.redraw()
+})
+
+$('#nearesttoggle').on('click', function() {
+    nearestButton.style.display = "none";
+})

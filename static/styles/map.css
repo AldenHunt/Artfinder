@@ -9,6 +9,12 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
 #mapid {
     width: 100%;
     height: 100vh;
@@ -21,16 +27,36 @@ body {
     right: 10px;
     top: 10px;
     z-index: 25000;
+    font-family: 'Quicksand', sans-serif;
+    padding: 10px;
+
 }
 
 #nearest {
-    background: lightgrey;
-    position: absolute;
+    background:  lightgrey;
+    /*position: absolute;
     right: 5px;
-    top: 40px;
+    top: 40px;  
+    padding: 0px; */
     width: 350px;
     z-index: 25000;
 } 
+
+#dismiss {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    background-color:  rgb(250, 160, 127);
+    border-color:  rgb(250, 160, 127);
+    -webkit-transition-duration: 0.8s; /* Safari */
+    transition-duration: 0.8s;
+      
+
+}
+#dismiss:hover{
+    background-color: whitesmoke;
+    color: coral;
+}
 
 h2 {
    color: whitesmoke; 
@@ -52,9 +78,8 @@ a {
 
  #locationHeader {
     background-color: coral;
-    margin-top: 0.67em;
     text-align: center;
-    padding: 1em;
+    padding: 14px 35px;
     color: whitesmoke;
     font-size: 1.5em;
     font-weight: bold;
