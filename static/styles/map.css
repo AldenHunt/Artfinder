@@ -20,7 +20,6 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
-    z-index: 30000;
 }
 
 
@@ -43,6 +42,7 @@ body {
     width: 350px;
     z-index: 25000;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 90vh;
 } 
 #nearest.active {
