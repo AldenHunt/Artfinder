@@ -38,16 +38,13 @@ body {
     position: absolute;
     right: 5px;
     top: 10px;  
-    padding: 0px;
+    padding: 0px; 
     width: 350px;
     z-index: 25000;
     overflow-y: auto;
     overflow-x: hidden;
     height: 90vh;
 } 
-#nearest.active {
-    margin-right: -350px !important; 
-}
 
 #dismiss {
     width: 35px;

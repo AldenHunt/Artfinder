@@ -85,13 +85,12 @@ function sideBarNoLocation(){
                 var creators = data[item]["creators"];
                 var link = data[item]["objectid"]
                 var position = Number(item) + 1;
-                link = "<a href=objects/" + link + ">"
                 var imgURI = data[item]["image"];
                 var htmlTextId = '#sideLocate' + position;
                 var htmlImageId = '#sideLocateImage' + position;
                 link = "<a href=objects/" + link + ">"
                 $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
-                $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
+                $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
         }
