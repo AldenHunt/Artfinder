@@ -90,7 +90,7 @@ function sideBarNoLocation(){
                 var htmlTextId = '#sideLocate' + position;
                 var htmlImageId = '#sideLocateImage' + position;
                 link = "<a href=objects/" + link + ">"
-                $(htmlTextId).append(position + ". " + "<b>" + link + title + "</a>" + "<br>");
+                $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
