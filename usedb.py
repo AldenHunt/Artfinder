@@ -95,7 +95,7 @@ def display_objects_location(db_file, lat, long, n):
 	sortedr = sorted(unsorted.items(), key=operator.itemgetter(1))
 	for j in range(n):
 		objid = sortedr[j][0]
-		cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators)) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objid,))
+		cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators, 'image', image)) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objid,))
 		rows = cur.fetchall()
 		json_string = rows[0][0]
 		json_object = json.loads(json_string)

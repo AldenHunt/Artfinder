@@ -1,6 +1,6 @@
 // Initial Leaflet javascript - get map and center on Princeton
-var corner1 = L.latLng(40.354, -74.645),
-corner2 = L.latLng(40.334, -74.672),
+var corner1 = L.latLng(40.36, -74.64),
+corner2 = L.latLng(40.33, -74.68),
 bounds = L.latLngBounds(corner1, corner2);
 
 //map flies to these coordinates if location does not work or not turned on
@@ -22,9 +22,10 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 //Mark the current location (from Leaflet tutorial)
 function onLocationFound(e) {
     var radius = e.accuracy/2;
+    console.log(radius);
     // Only print circle if pretty sure in the location panned to 
-    if (radius > 100) {
-        alert("Location may not be accurate on devices without GPS functionality")
+    if (radius > 175) {
+        alert("Location may not be accurate on devices without GPS functionality");
     }
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
@@ -38,16 +39,20 @@ function onLocationFound(e) {
             data: data,
             success: function(data){
                 data = JSON.parse(data)
-                $('#locationHeader').append('We\'ve found the top 5 closest art pieces to you');
+                $('#locationHeader').html('Closest art pieces to you');
                 for (item in data) {
                     var title = data[item]["title"];
                     var creators = data[item]["creators"];
                     var dist = Math.round(data[item]["dist"]);
                     var link = data[item]["objectid"]
+                    var imgURI = data[item]["image"];
                     var position = Number(item) + 1;
+                    var htmlTextId = '#sideLocate' + position;
+                    var htmlImageId = '#sideLocateImage' + position;
                     link = "<a href=objects/" + link + ">"
-                    $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
-                    $('#sideLocate').append(creators + "<br>" + dist + " feet<br>");
+                    $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                    $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
+                    $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
                 }
             }
         })
@@ -67,23 +72,27 @@ function sideBarNoLocation(){
     var data = {
         lat: defaultLat.toString(),
         lng: defaultLng.toString()
-    }
+    };
     $.ajax({
         type: 'POST',
         url: '/map',
         data: data,
         success: function(data){
             data = JSON.parse(data)
-            $('#locationHeader').append('We can\'t find your exact location. Here are objects close to the Princeton University Art Museum');
+            $('#locationHeader').html('We can\'t find your exact location. Here are objects close to the Princeton University Art Museum');
             for (item in data) {
                 var title = data[item]["title"];
                 var creators = data[item]["creators"];
-                var dist = Math.round(data[item]["dist"]);
                 var link = data[item]["objectid"]
                 var position = Number(item) + 1;
                 link = "<a href=objects/" + link + ">"
-                $('#sideLocate').append(position + ". " + "<b>" + link + title + "<br>");
-                $('#sideLocate').append(creators + "<br>");
+                var imgURI = data[item]["image"];
+                var htmlTextId = '#sideLocate' + position;
+                var htmlImageId = '#sideLocateImage' + position;
+                link = "<a href=objects/" + link + ">"
+                $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
+                $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
         }
     })
@@ -109,8 +118,25 @@ function addMarkers(){
         var link = objdata[item]["objectid"];
         var imgURI = objdata[item]["image"];
         var data = ("<div class='row'><div class='col'><img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
-        marker.bindPopup(data).openPopup();
+        marker.bindPopup(data);
     }
 }
 
 addMarkers();
+
+var nearestButton = document.getElementById("nearesttoggle")
+$('#nearesttoggle').hide()
+
+$('#dismiss').on("click", function() {
+    $('#nearesttoggle').show()
+    $('#nearest').toggleClass('active');
+})
+
+$('#dismiss').on('click', function() {
+    nearestButton.style.display = "block";
+})
+
+$('#nearesttoggle').on('click', function() {
+    nearestButton.style.display = "none"
+    $('#nearest').toggleClass('active');
+})

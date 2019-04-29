@@ -18,6 +18,8 @@
         <!-- Our CSS-->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/map.css') }}">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <!--Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
         <!--link rel="stylesheet" type="text/css" href="map.css"-->
         <title>Princeton Artfinder - Map</title>
     </head>
@@ -28,7 +30,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+        
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="form-inline ml-auto mr-2">
                         <input class="form-control m-1" type="search" placeholder="'Picasso', '1910', 'Steel'" aria-label="Search">
@@ -37,15 +39,44 @@
                 </div>
             </nav>
         </header>
-        <div class="container-fluid">
-            <div class="row">
-                    <div id="mapid" class="col-12 col-md-8"></div>
-                    <div class="col-4 col-md-4">
-                        <h1 id="locationHeader"></h1>
-                        <p id="sideLocate"></p>
-                    </div>
+        <main>
+            <div class="wrapper">
+            <div id="mapid">
+                    <button class="btn-primary" id="nearesttoggle" type="button" data-toggle="collapse" data-target="#nearest" aria-controls="nearest" aria-expanded="true" aria-label="Toggle nearest objects">
+                            Nearest items
+                    </button>
             </div>
-        </div>
+                <div id="nearest" class="collapse show p-2">
+                    <button class="btn-primary" id="dismiss" type = "button" data-toggle="collapse" data-target="#nearest" aria-controls="nearest" aria-expanded="false" aria-label="Toggle nearest objects" >
+                            > <!-- That's meant as an actual arrow! -->
+                    </button>    
+                    <h1 id="locationHeader">
+                        Using location to search for art...
+                    </h1>
+                    <div class ="row">
+                        <div id = "sideLocate1" class = "col-12 col-md-8"></div>
+                        <div id = "sideLocateImage1" class = "col-4 col-md-4"></div>
+                    </div>
+                    <div class ="row">
+                        <div id = "sideLocate2" class = "col-12 col-md-8"></div>
+                        <div id = "sideLocateImage2" class = "col-4 col-md-4"></div>
+                    </div>
+                        <div class ="row">
+                            <div id = "sideLocate3" class = "col-12 col-md-8"></div>
+                            <div id = "sideLocateImage3" class = "col-4 col-md-4"></div>
+                    </div>
+                    <div class ="row">
+                        <div id = "sideLocate4" class = "col-12 col-md-8"></div>
+                        <div id = "sideLocateImage4" class = "col-4 col-md-4"></div>
+                    </div>
+                    <div class ="row">
+                    <div id = "sideLocate5" class = "col-12 col-md-8"></div>
+                        <div id = "sideLocateImage5" class = "col-4 col-md-4"></div> 
+                        </div>
+                                
+                </div>
+            </div>
+        </main>
         <!-- This is a jinja generated variable of all database items passed from the database through our server. 
             Needs to go here- will not work if moved to map.js-->
         <script type = "text/javascript"> var objects = '{{objects|tojson}}' </script> 
