@@ -23,6 +23,11 @@ def map():
         return closestObjects
 
    
+@app.route('/search', methods = ['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+
+    return render_template('search.html')
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
