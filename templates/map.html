@@ -20,7 +20,6 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <!--Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-        <!--link rel="stylesheet" type="text/css" href="map.css"-->
         <title>Princeton Artfinder - Map</title>
     </head>
     <body class="d-flex flex-column">
@@ -32,7 +31,12 @@
                 </button>
         
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="form-inline ml-auto mr-2" action="search">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://forms.gle/MdE3YgcoUkZ9mbmB8">Feedback</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline mr-2" action="search">
                         <input class="form-control m-1" type="search" placeholder="'Picasso', '1910', 'Steel'" aria-label="Search">
                         <button class="btn btn-outline-primary" type="submit">Search</button>
                     </form> 

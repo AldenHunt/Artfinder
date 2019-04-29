@@ -5,6 +5,7 @@
 
 body {
     background-color: lightgray;
+    font-family: 'Quicksand', sans-serif;
 }
 
 h2 {
@@ -13,6 +14,7 @@ h2 {
 
 .footer {
     background-color: darkgray;
+    text-align: center;
 }
 
 a {

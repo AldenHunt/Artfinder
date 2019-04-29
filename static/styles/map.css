@@ -9,6 +9,10 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+.navitem {
+    text-align: right;
+}
+
 .wrapper {
     display: flex;
     width: 100%;
