@@ -85,7 +85,6 @@ function sideBarNoLocation(){
                 var creators = data[item]["creators"];
                 var link = data[item]["objectid"]
                 var position = Number(item) + 1;
-                link = "<a href=objects/" + link + ">"
                 var imgURI = data[item]["image"];
                 var htmlTextId = '#sideLocate' + position;
                 var htmlImageId = '#sideLocateImage' + position;
