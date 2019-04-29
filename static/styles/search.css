@@ -1,0 +1,21 @@
+.navbar {
+    background-color: black;
+    color: whitesmoke;
+}
+
+body {
+    background-color: lightgray;
+}
+
+h2 {
+   color: whitesmoke; 
+}
+
+.footer {
+    background-color: black;
+    color: whitesmoke;
+}
+
+a {
+    text-decoration: none !important;
+}

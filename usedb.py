@@ -1,4 +1,4 @@
- # usedb.py
+# usedb.py
 # a collection of sql methods to return data from the database
 # untested
 # Rhea Braun, Sadie Van Vranken
@@ -107,4 +107,20 @@ def display_objects_location(db_file, lat, long, n):
 	conn.close()
 	results = json.dumps(results)
 	return results
+	
+def objects_search(db_file, string):
+	key = '%' + string + '%'
+	conn = sqlite3.connect(db_file)
+	cur = conn.cursor()
+	cur.execute("SELECT objectid FROM objects WHERE title LIKE ? OR creators LIKE ? OR dates LIKE ? OR description LIKE ?", (key, key, key, key,))
+	rows = cur.fetchall()
+	conn.close()
+	return rows
+	
+def json_search(db_file, string):
+	hits = objects_search(db_file, string)
+	result = ''
+	for objid in hits:
+		result += json_object_data(db_file, objid[0])
+	return json.dumps(result)
 	
