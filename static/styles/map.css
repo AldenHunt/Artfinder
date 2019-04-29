@@ -41,6 +41,9 @@ body {
     padding: 0px; 
     width: 350px;
     z-index: 25000;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 90vh;
 } 
 
 #dismiss {
