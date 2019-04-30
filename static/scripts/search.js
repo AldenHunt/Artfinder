@@ -10,8 +10,12 @@ function searchResults(){
         buttonMap.className = "btn btn-primary"
         buttonObject.className = "btn btn-primary"
         var link = objdata[item]["objectid"]
+        var lat = objdata[item]["lat"];
+        var lng = objdata[item]["long"];
+        console.log(lng);
+
         link = "objects/" + link
-        buttonMap.href = "map"
+        buttonMap.href = "map?lat=" + lat + "&lng=" + lng + "&zoom=13"
         buttonObject.href = link
         buttonMap.innerHTML = "See on the map"
         buttonObject.innerHTML = "More information"
@@ -32,4 +36,5 @@ function searchResults(){
 
     }
 }
+
 searchResults();
