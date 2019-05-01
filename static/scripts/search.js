@@ -5,13 +5,23 @@ function searchResults(){
     for (item in objdata) {
         var element = document.createElement("div");
         element.className = "row"
+        
         var buttonMap = document.createElement("a");
         var buttonObject = document.createElement("a");
-        buttonMap.className = "btn btn-primary"
-        buttonObject.className = "btn btn-primary"
+        buttonMap.className = "btn btn-primary m-2"
+        buttonObject.className = "btn btn-primary m-2"
+
+        var dataCol = document.createElement("div");
+        var picCol = document.createElement("div");
+        dataCol.className = "col-md-6"
+        picCol.className = "col-md-6"
+        element.appendChild(dataCol);
+        element.appendChild(picCol);
+        
         var link = objdata[item]["objectid"]
         var lat = objdata[item]["lat"];
         var lng = objdata[item]["long"];
+        var sepEntries = document.createElement("hr")
         console.log(lng);
 
         link = "objects/" + link
@@ -22,16 +32,22 @@ function searchResults(){
 
         var list = document.getElementById("searchList")
         var number = Number(item) + 1;
+        dataCol.id = "data" + number
+        picCol.id = "pic" + number
         element.id = "listItem" + number
         list.append(element)
         list.appendChild(buttonMap)
         list.appendChild(buttonObject)
+        list.appendChild(sepEntries)
         var title = objdata[item]["title"];
         var creators = objdata[item]["creators"];
         
         var imgURI = objdata[item]["image"];
-        var info = "<b>" + number + ". " + "</b>" + title + "</br>" + creators + "</br>";
-        var elementName = "#listItem" + number
+        var info = "<b>" + number + ".  " + "</b>" + title + "<br>" + creators + "<br>";
+        var pic = "<img src=" + imgURI + "/full/,150/0/default.jpg>"
+        var picName = "#pic" + number
+        var elementName = "#data" + number
+        $(picName).append(pic);
         $(elementName).append(info);
 
     }
