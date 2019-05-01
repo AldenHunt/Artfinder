@@ -49,10 +49,12 @@ function onLocationFound(e) {
                     var position = Number(item) + 1;
                     var htmlTextId = '#sideLocate' + position;
                     var htmlImageId = '#sideLocateImage' + position;
+                    var imgArray = imgURI.split(',');
+                    var imgLink = imgArray[0];
                     link = "<a href=objects/" + link + ">"
                     $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
-                    $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
+                    $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
                 }
             }
         })
@@ -88,10 +90,12 @@ function sideBarNoLocation(){
                 var imgURI = data[item]["image"];
                 var htmlTextId = '#sideLocate' + position;
                 var htmlImageId = '#sideLocateImage' + position;
+                var imgArray = imgURI.split(',');
+                var imgLink = imgArray[0];
                 link = "<a href=objects/" + link + ">"
                 $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                 $(htmlTextId).append(creators + "<br>");
-                $(htmlImageId).append("<img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
+                $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
         }
     })
@@ -116,7 +120,9 @@ function addMarkers(){
         var creators = objdata[item]["creators"];
         var link = objdata[item]["objectid"];
         var imgURI = objdata[item]["image"];
-        var data = ("<div class='row'><div class='col'><img src="+imgURI+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
+        var imgArray = imgURI.split(',');
+        var imgLink = imgArray[0];
+        var data = ("<div class='row'><div class='col'><img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
         marker.bindPopup(data);
     }
 }

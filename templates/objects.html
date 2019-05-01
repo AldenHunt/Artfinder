@@ -22,15 +22,15 @@
                 </button>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://forms.gle/MdE3YgcoUkZ9mbmB8">Feedback</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline mr-2" action="/search">
-                        <input class="form-control m-1" type="search" placeholder="'Picasso', '1910', 'Steel'" aria-label="Search">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form> 
+                        <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://forms.gle/MdE3YgcoUkZ9mbmB8">Feedback</a>
+                                </li>
+                            </ul>
+                            <form class="form-inline mr-1" id = "search" action="/search" method="POST">
+                                <input class="form-control m-1" type="search" name="search" placeholder="'Picasso', '1910', 'Steel'" aria-label="Search">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                            </form> 
                 </div>
             </nav>
         </header>
@@ -38,8 +38,9 @@
         <main role="main">
             <div class ="container-fluid"> 
                 <div class="row">
+                    {% set imgLook=objdata[5].split(',') %}
                     <div class="col-md-4">
-                        <img src={{objdata[5]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" max-width=100% class="img-fluid" height=auto>
+                        <img src={{imgLook[0]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" max-width=100% class="img-fluid" height=auto>
                     </div>
                     <div class="col-md-8">
                         <h1>{{objdata[1]}}</h3> <!--Name of work-->

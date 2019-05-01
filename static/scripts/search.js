@@ -8,7 +8,7 @@ function searchResults(){
         
         var buttonMap = document.createElement("a");
         var buttonObject = document.createElement("a");
-        buttonMap.className = "btn btn-primary m-2"
+        buttonMap.className = "btn btn-primary m-2 disabled"
         buttonObject.className = "btn btn-primary m-2"
 
         var dataCol = document.createElement("div");
@@ -43,8 +43,10 @@ function searchResults(){
         var creators = objdata[item]["creators"];
         
         var imgURI = objdata[item]["image"];
+        var imgArray = imgURI.split(',');
+        var imgLink = imgArray[0];
         var info = "<b>" + number + ".  " + "</b>" + title + "<br>" + creators + "<br>";
-        var pic = "<img src=" + imgURI + "/full/,150/0/default.jpg>"
+        var pic = "<img src=" + imgLink + "/full/,150/0/default.jpg>"
         var picName = "#pic" + number
         var elementName = "#data" + number
         $(picName).append(pic);
