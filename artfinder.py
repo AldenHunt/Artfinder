@@ -36,7 +36,8 @@ def search():
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
 def show_object_data(obj_id):
+    objimg = usedb.json_object_img('artobjects.db', obj_id)
     objdata = usedb.display_object_data('artobjects.db', obj_id)
-    return render_template('objects.html', objdata=objdata)
+    return render_template('objects.html', objdata=objdata, objimg=objimg)
 
 
