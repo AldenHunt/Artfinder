@@ -73,7 +73,31 @@ def populate_table(conn):
 				print(e)
 		conn.commit()
 
-		
+def update_images(conn):
+	lib = "https://data.artmuseum.princeton.edu/objects/"
+	update= ''' UPDATE objects
+                  SET image = ?
+              WHERE objectid = ?'''
+	cur = conn.cursor()
+	cur.execute("SELECT * FROM objects")
+	rows = cur.fetchall()
+	for row in rows:
+		id = row[0]
+		url = lib + str(id)
+		info = json.loads(urlopen(url).read())
+		image = ''
+		i = 0
+		for data in info["media"]:
+			if i > 0: 
+				image += ', '
+			image += data["uri"]
+			i+= 1
+		print(i)
+		print(image)
+		pics = [image, id]
+		cur.execute(update, pics)
+	conn.commit()
+	
 def update_table(conn):
 	lib = "https://data.artmuseum.princeton.edu/objects/"
 	update= ''' UPDATE objects
@@ -125,13 +149,13 @@ def main():
 	conn = create_connection(database)
 	if conn is not None:
 		# remove existing table
-		drop_table(conn)
+		#drop_table(conn)
 		# create objects table
-		create_table(conn)
+		#create_table(conn)
 		# add items
-		populate_table(conn)
-		update_table(conn)
-		
+		#populate_table(conn)
+		#update_table(conn)
+		update_images(conn)
 		# display the created table
 		display_table(conn)
 		conn.close()
