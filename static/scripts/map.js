@@ -139,3 +139,13 @@ $('#nearesttoggle').on('click', function() {
     nearestButton.style.display = "none"
     $('#nearest').toggleClass('active');
 })
+
+// taken from https://stackoverflow.com/questions/44757839/link-to-a-specific-point-on-leaflet-map
+function getQueryStringValue (key) {  
+    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+  } 
+var lat = getQueryStringValue("lat");
+var lng = getQueryStringValue("lng");
+var zoom = getQueryStringValue("zoom");
+
+mymap.flyTo([lat, lng], zoom);

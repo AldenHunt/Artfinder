@@ -108,19 +108,22 @@ def display_objects_location(db_file, lat, long, n):
 	results = json.dumps(results)
 	return results
 	
-def objects_search(db_file, string):
+def json_search(db_file, string):
 	key = '%' + string + '%'
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
-	cur.execute("SELECT objectid FROM objects WHERE title LIKE ? OR creators LIKE ? OR dates LIKE ? OR description LIKE ?", (key, key, key, key,))
+	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators, 'image', image)) AS json_result FROM (SELECT * FROM  objects WHERE title LIKE ? OR creators LIKE ? OR dates LIKE ? OR description LIKE ?)", (key, key, key, key,))
 	rows = cur.fetchall()
+	json_string = rows[0][0]
+	json_object = json.loads(json_string)
 	conn.close()
-	return rows
+	return json_object
 	
-def json_search(db_file, string):
-	hits = objects_search(db_file, string)
-	result = ''
-	for objid in hits:
-		result += json_object_data(db_file, objid[0])
-	return json.dumps(result)
+# def json_search(db_file, string):
+	#hits = objects_search(db_file, string)
+	#result = [];
+	#for objid in hits:
+		#print(hits[0][0])
+		#result += json_object_data(db_file, hits[0][0])
+	#return json.dumps(result) 
 	

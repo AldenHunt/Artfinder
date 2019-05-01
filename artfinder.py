@@ -27,8 +27,8 @@ def map():
 def search():
     if request.method == 'POST':
         searchString = request.form.get('search')
-        searchedObjects = usedb.objects_search('artobjects.db', searchString)
-    return render_template('search.html')
+        searchedObjects = usedb.json_search('artobjects.db', searchString)
+    return render_template('search.html', searchedObjects = searchedObjects, searchString = searchString)
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
