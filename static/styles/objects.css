@@ -12,6 +12,11 @@ h2 {
    color: whitesmoke; 
 }
 
+#media {
+    overflow: hidden;
+    width: 100%;
+    max-height: auto;
+}
 .footer {
     background-color: darkgray;
     text-align: center;

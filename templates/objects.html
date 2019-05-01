@@ -48,10 +48,10 @@
             <div class ="container-fluid"> 
                 <div class="row">
                     {% set imgLook=objdata[5].split(',') %}
-                    <div class="col-md-4" id="media">
-                        <img src={{imgLook[0]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" max-width=100% class="img-fluid" height=auto>
+                    <div class="col col-md-4" id="media">
+                        <img src={{imgLook[0]}}/full/full/0/default.jpg alt={{objdata[1]}} id="pic" width=100% class="img-fluid m-1" height=auto>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col col-md-8">
                         <h1>{{objdata[1]}}</h3> <!--Name of work-->
                         <h4>{{objdata[2]}}</h4> <!--Artist-->
                         <p>{{objdata[3]}}</p> <!--Time period-->

@@ -16,10 +16,10 @@ function createMedia() {
             carousel.getElementsByClassName("carousel-indicators")[0].appendChild(indicator);
             // add the image
             var image = strToDOMElement(`<div class="carousel-item">
-                <img class="d-block w-100" src="" alt="">
+                <img class="d-block w-100 m-1" src="" alt="">
             </div>`);
             image.getElementsByTagName("img")[0].setAttribute("src", images[i]+"/full/full/0/default.jpg");
-            image.getElementsByTagName("img")[0].setAttribute("alt", "slide "+i);
+            image.getElementsByTagName("img")[0].setAttribute("alt", "Slide "+(i+1));
             if (i==0) { image.classList.add("active"); }
             carousel.getElementsByClassName("carousel-inner")[0].appendChild(image);
         }
