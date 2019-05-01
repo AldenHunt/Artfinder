@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, request, make_response, Markup
+from flask import Flask, url_for, render_template, request, make_response, Markup, redirect
 from flask_sslify import SSLify
 import usedb
 
@@ -28,7 +28,10 @@ def search():
     if request.method == 'POST':
         searchString = request.form.get('search')
         searchedObjects = usedb.json_search('artobjects.db', searchString)
-    return render_template('search.html', searchedObjects = searchedObjects, searchString = searchString)
+        return render_template('search.html', searchedObjects = searchedObjects, searchString = searchString)
+    else:
+        return redirect(url_for('map'))
+    
 
 # However we're going to display the full data about an object
 @app.route('/objects/<int:obj_id>')
