@@ -16,7 +16,7 @@ function createMedia() {
             carousel.getElementsByClassName("carousel-indicators")[0].appendChild(indicator);
             // add the image
             var image = strToDOMElement(`<div class="carousel-item">
-                <img class="d-block w-100 m-1" src="" alt="">
+                <img width=100% class="img-fluid m-1" height=auto src="" alt="">
             </div>`);
             image.getElementsByTagName("img")[0].setAttribute("src", images[i]+"/full/full/0/default.jpg");
             image.getElementsByTagName("img")[0].setAttribute("alt", "Slide "+(i+1));
