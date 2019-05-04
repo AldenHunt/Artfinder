@@ -115,7 +115,13 @@ function addMarkers(){
     var objdata = JSON.parse(objects);
 
     for (item in objdata) {
-        var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]]).addTo(mymap);
+        // custom icon for map marker
+        var customIcon = L.icon({
+            iconUrl: '/static/icon_blue.png',
+            iconSize: [30, 30], // size of the icon
+            popupAnchor: [0,-5]
+            });
+        var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]], {icon: customIcon}).addTo(mymap);
         var title = objdata[item]["title"];
         var creators = objdata[item]["creators"];
         var link = objdata[item]["objectid"];
