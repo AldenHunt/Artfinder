@@ -8,7 +8,7 @@ function searchResults(){
         
         var buttonMap = document.createElement("a");
         var buttonObject = document.createElement("a");
-        buttonMap.className = "btn btn-primary m-2 disabled"
+        buttonMap.className = "btn btn-primary m-2"
         buttonObject.className = "btn btn-primary m-2"
 
         var dataCol = document.createElement("div");
@@ -18,14 +18,14 @@ function searchResults(){
         element.appendChild(dataCol);
         element.appendChild(picCol);
         
-        var link = objdata[item]["objectid"]
+        var id = objdata[item]["objectid"]
         var lat = objdata[item]["lat"];
         var lng = objdata[item]["long"];
         var sepEntries = document.createElement("hr")
         console.log(lng);
 
-        link = "objects/" + link
-        buttonMap.href = "map?lat=" + lat + "&lng=" + lng + "&zoom=13"
+        link = "objects/" + id
+        buttonMap.href = "map?id=" + id;
         buttonObject.href = link
         buttonMap.innerHTML = "See on the map"
         buttonObject.innerHTML = "More information"

@@ -47,14 +47,14 @@ function onLocationFound(e) {
                     var title = data[item]["title"];
                     var creators = data[item]["creators"];
                     var dist = Math.round(data[item]["dist"]);
-                    var link = data[item]["objectid"]
+                    var id = data[item]["objectid"]
                     var imgURI = data[item]["image"];
                     var position = Number(item) + 1;
                     var htmlTextId = '#sideLocate' + position;
                     var htmlImageId = '#sideLocateImage' + position;
                     var imgArray = imgURI.split(',');
                     var imgLink = imgArray[0];
-                    link = "<a href=objects/" + link + ">"
+                    link = "<a href=?id=" + id + ">"
                     $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
                     $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
@@ -89,14 +89,14 @@ function sideBarNoLocation(){
             for (item in data) {
                 var title = data[item]["title"];
                 var creators = data[item]["creators"];
-                var link = data[item]["objectid"]
+                var id = data[item]["objectid"]
                 var position = Number(item) + 1;
                 var imgURI = data[item]["image"];
                 var htmlTextId = '#sideLocate' + position;
                 var htmlImageId = '#sideLocateImage' + position;
                 var imgArray = imgURI.split(',');
                 var imgLink = imgArray[0];
-                link = "<a href=objects/" + link + ">"
+                link = "<a href=?id=" + id + ">"
                 $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
@@ -139,7 +139,7 @@ function addMarkers(){
             iconUrl: '/static/icon_blue.png',
             iconSize: [30, 30], // size of the icon
             popupAnchor: [0,-5]
-            });
+        });
         var marker = L.marker([objdata[item]["lat"], objdata[item]["long"]], {icon: customIcon}).addTo(mymap);
         var title = objdata[item]["title"];
         var creators = objdata[item]["creators"];
@@ -176,12 +176,3 @@ $('#nearesttoggle').on('click', function() {
     $('#nearest').toggleClass('active');
 })
 
-// taken from https://stackoverflow.com/questions/44757839/link-to-a-specific-point-on-leaflet-map
-function getQueryStringValue (key) {  
-    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
-  } 
-var lat = getQueryStringValue("lat");
-var lng = getQueryStringValue("lng");
-var zoom = getQueryStringValue("zoom");
-
-mymap.flyTo([lat, lng], zoom);
