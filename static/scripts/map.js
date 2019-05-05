@@ -9,6 +9,8 @@ var defaultLng = -74.6581;
 
 var mymap = L.map('mapid', {maxBounds: bounds, minZoom: 15, maxZoom: 19}).setView([40.3474, -74.6581], 17);
 
+var idMarkers = new Map();
+
 /* We're currently getting our tiles (the actual map rendering) from
 Mapbox. If this app ever gets big, we really should change providers
 or start paying somebody */
@@ -25,7 +27,7 @@ function onLocationFound(e) {
     console.log(radius);
     // Only print circle if pretty sure in the location panned to 
     if (radius > 175) {
-        alert("Location may not be accurate on devices without GPS functionality");
+        console.log("Location may not be accurate on devices without GPS functionality");
     }
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
@@ -118,6 +120,8 @@ function locateOnMap() {
     for (item in objdata) {
         if (objdata[item]["objectid"] == id) {
             mymap.flyTo(new L.LatLng(objdata[item]["lat"], objdata[item]["long"]), 18);
+            var marker = idMarkers.get(objdata[item]["objectid"]);
+            marker.openPopup();
             return;
         }
     }
@@ -127,6 +131,7 @@ function locateOnMap() {
 function addMarkers(){
     /* objects is passed from server to map.html with jinja2. */
     var objdata = JSON.parse(objects);
+    
 
     for (item in objdata) {
         // custom icon for map marker
@@ -139,15 +144,20 @@ function addMarkers(){
         var title = objdata[item]["title"];
         var creators = objdata[item]["creators"];
         var link = objdata[item]["objectid"];
+        
         var imgURI = objdata[item]["image"];
         var imgArray = imgURI.split(',');
         var imgLink = imgArray[0];
         var data = ("<div class='row'><div class='col'><img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style='width: 120px' height=auto></div><div class='col'><b>" + "<a href=objects/" + link + " id='title'>" + title + "</a>" + "</b>" + creators+"</div>");
         marker.bindPopup(data);
+        idMarkers.set(objdata[item]["objectid"], marker);
     }
 }
 
 addMarkers();
+for (var value of idMarkers.values()) {
+    console.log(value);
+  }
 
 var nearestButton = document.getElementById("nearesttoggle")
 $('#nearesttoggle').hide()
