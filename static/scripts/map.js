@@ -51,14 +51,28 @@ function onLocationFound(e) {
                     var htmlImageId = '#sideLocateImage' + position;
                     var imgArray = imgURI.split(',');
                     var imgLink = imgArray[0];
-                    link = "<a href=objects/" + link + ">"
+                    var lat = data[item]["lat"];
+                    var lng = data[item]["long"];
+                    var titleLink = "titleLink" + position;
+                    link = "<a href=# id=" + titleLink + " data-lat=" + lat + " data-lng=" + lng + ">";
+                    
                     $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
                     $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
+                    
+                    
+                    
                 }
+                
             }
         })
 }
+
+$("titleLink1").on('click', function(){
+    lat = titleLink.data-lat
+    lng = titleLink.data-lng
+    mymap.flyTo([lat, lng], 20);
+});
 
 //If error, note in console
 function onLocationError(e) {
@@ -92,13 +106,20 @@ function sideBarNoLocation(){
                 var htmlImageId = '#sideLocateImage' + position;
                 var imgArray = imgURI.split(',');
                 var imgLink = imgArray[0];
-                link = "<a href=objects/" + link + ">"
+                var lat = data[item]["lat"];
+                var lng = data[item]["long"];
+                link = "<a onclick=" + zoomTo(lat, lng) + ">";
                 $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
         }
     })
+
+}
+
+function zoomTo(lat, lng){
+    
 
 }
 
@@ -155,3 +176,5 @@ var lng = getQueryStringValue("lng");
 var zoom = getQueryStringValue("zoom");
 
 mymap.flyTo([lat, lng], zoom);
+
+$('')
