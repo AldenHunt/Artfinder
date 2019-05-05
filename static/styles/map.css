@@ -26,6 +26,10 @@ body {
     position: relative;
 }
 
+.btn-link {
+    padding: 0;
+    font-weight: bold;
+}
 
 #nearesttoggle {
     position: absolute;

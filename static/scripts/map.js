@@ -54,7 +54,8 @@ function onLocationFound(e) {
                     var htmlImageId = '#sideLocateImage' + position;
                     var imgArray = imgURI.split(',');
                     var imgLink = imgArray[0];
-                    link = "<a href=?id=" + id + ">"
+
+                    var link = "<button class=\"btn btn-link\" onclick=locateByID(" + id + ")>"
                     $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
                     $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
@@ -96,8 +97,9 @@ function sideBarNoLocation(){
                 var htmlImageId = '#sideLocateImage' + position;
                 var imgArray = imgURI.split(',');
                 var imgLink = imgArray[0];
-                link = "<a href=?id=" + id + ">"
-                $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                var link = "<button class=\"btn btn-link\" onclick=locateByID(" + id + ")>"
+                $(htmlTextId).append(position + ". " + "<b>" + link + title + "</button></b>");
+                $(htmlTextID).append("<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
             }
@@ -113,6 +115,19 @@ mymap.on('locationerror', onLocationError);
 /* doesn't set the view if query string contains a valid id */
 mymap.locate({setView: false, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
 
+
+function locateByID(id) {
+    console.log("Called!");
+    var objdata = JSON.parse(objects);
+    for (item in objdata) {
+        if (objdata[item]["objectid"] == id) {
+            mymap.flyTo(new L.LatLng(objdata[item]["lat"], objdata[item]["long"]), 18);
+            var marker = idMarkers.get(objdata[item]["objectid"]);
+            marker.openPopup();
+            return;
+        }
+    }
+}
 // centers the map view on the object with the id in query string
 function locateOnMap() {
     var objdata = JSON.parse(objects);
@@ -155,9 +170,6 @@ function addMarkers(){
 }
 
 addMarkers();
-for (var value of idMarkers.values()) {
-    console.log(value);
-  }
 
 var nearestButton = document.getElementById("nearesttoggle")
 $('#nearesttoggle').hide()
@@ -175,4 +187,6 @@ $('#nearesttoggle').on('click', function() {
     nearestButton.style.display = "none"
     $('#nearest').toggleClass('active');
 })
+
+
 
