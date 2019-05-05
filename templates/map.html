@@ -91,7 +91,8 @@
         </main>
         <!-- This is a jinja generated variable of all database items passed from the database through our server. 
             Needs to go here- will not work if moved to map.js-->
-        <script type = "text/javascript"> var objects = '{{objects|tojson}}' </script> 
+        <script type = "text/javascript"> var objects = '{{objects|tojson}}' </script>
+        <script type = "text/javascript"> var obj_id = '{{obj_id|tojson}}' </script> 
         <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='scripts/map.js') }}"></script>
         <!-- Bootstrap JavaScript -->

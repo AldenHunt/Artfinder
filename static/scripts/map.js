@@ -3,7 +3,7 @@ var corner1 = L.latLng(40.36, -74.64),
 corner2 = L.latLng(40.33, -74.68),
 bounds = L.latLngBounds(corner1, corner2);
 
-//map flies to these coordinates if location does not work or not turned on
+// map flies to these coordinates if location does not work or not turned on
 var defaultLat = 40.3474;
 var defaultLng = -74.6581;
 
@@ -32,6 +32,7 @@ function onLocationFound(e) {
             lat: e.latlng.lat.toString(),
             lng: e.latlng.lng.toString()
         }
+        mymap.flyTo([data["lat"], data["lng"]], 18);
         // send location to server, returns info for 5 closest art pieces
         $.ajax({
             type: 'POST',
@@ -58,6 +59,7 @@ function onLocationFound(e) {
                 }
             }
         })
+    locateOnMap();
 }
 
 //If error, note in console
@@ -65,7 +67,7 @@ function onLocationError(e) {
     console.log("Error: Location failed");
     //default to location of Princeton University Art Museum
     sideBarNoLocation();
-
+    locateOnMap();
 }
 
 // Populates side bar if no location services or error in location services, using art museum as default location
@@ -106,8 +108,20 @@ mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
 /* Automatically locates the user and sets the view to their location) */
-/* Automatically locates the user and sets the view to their location) */
-mymap.locate({setView: true, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
+/* doesn't set the view if query string contains a valid id */
+mymap.locate({setView: false, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
+
+// centers the map view on the object with the id in query string
+function locateOnMap() {
+    var objdata = JSON.parse(objects);
+    var id = JSON.parse(obj_id);
+    for (item in objdata) {
+        if (objdata[item]["objectid"] == id) {
+            mymap.flyTo(new L.LatLng(objdata[item]["lat"], objdata[item]["long"]), 18);
+            return;
+        }
+    }
+}
 
 /* Adds markers for all objects to map, with popup displaying information. */
 function addMarkers(){

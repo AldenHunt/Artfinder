@@ -14,8 +14,9 @@ def splash():
 @app.route('/map', methods = ['GET', 'POST'])
 def map():
     if request.method == 'GET':
+        obj_id = request.args.get('id')
         objects = usedb.json_objects_table('artobjects.db')
-        return render_template('map.html', objects=objects)
+        return render_template('map.html', objects=objects, obj_id=obj_id)
     elif request.method == 'POST':
         lat = float(request.form.get('lat'))
         lng = float(request.form.get('lng'))
