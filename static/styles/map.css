@@ -98,5 +98,18 @@ a {
     
  }
 
-      
-  
+ #sideLocate1 button {
+    color: red;
+ }
+ #sideLocate2 button {
+    color: #FF6A00;
+ }
+ #sideLocate3 button {
+    color: darkgoldenrod;
+ }
+ #sideLocate4 button {
+    color: green;
+ }
+ #sideLocate5 button {
+    color: #B200FF;
+ }

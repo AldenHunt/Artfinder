@@ -59,6 +59,7 @@ function onLocationFound(e) {
                     $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
                     $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
+                    recolorMarker(item, id);
                 }
             }
         })
@@ -102,6 +103,7 @@ function sideBarNoLocation(){
                 $(htmlTextID).append("<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
+                recolorMarker(item, id);
             }
         }
     })
@@ -111,10 +113,33 @@ function sideBarNoLocation(){
 mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
+// changes the color of the icon based on the rank
+function recolorMarker(rank, id) {
+    var color;
+    if (rank == 0) {
+        color = 'red';
+    } else if (rank == 1) {
+        color = 'orange';
+    } else if (rank == 2) {
+        color = 'yellow';
+    } else if (rank == 3) {
+        color = 'green';
+    } else {
+        color = 'purple';
+    }
+    var customIcon = L.icon({
+        iconUrl: '/static/icon_'+color+'.png',
+        iconSize: [30, 30], // size of the icon
+        popupAnchor: [0,-5]
+    });
+    var objdata = JSON.parse(objects);
+    var marker = idMarkers.get(id);
+    marker.setIcon(customIcon);
+}
+
 /* Automatically locates the user and sets the view to their location) */
 /* doesn't set the view if query string contains a valid id */
 mymap.locate({setView: false, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
-
 
 function locateByID(id) {
     console.log("Called!");
