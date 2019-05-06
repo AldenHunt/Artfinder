@@ -56,7 +56,8 @@ function onLocationFound(e) {
                     var imgLink = imgArray[0];
 
                     var link = "<button class=\"btn btn-link\" onclick=locateByID(" + id + ")>"
-                    $(htmlTextId).append(position + ". " + "<b>" + link + title + "<br>");
+                    $(htmlTextId).append(position + ". " + "<b>" + link + title);
+                    $(htmlTextId).append("<br>");
                     $(htmlTextId).append(creators + "<br>" + dist + " feet<br>");
                     $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
                     recolorMarker(item, id);
@@ -99,8 +100,8 @@ function sideBarNoLocation(){
                 var imgArray = imgURI.split(',');
                 var imgLink = imgArray[0];
                 var link = "<button class=\"btn btn-link\" onclick=locateByID(" + id + ")>"
-                $(htmlTextId).append(position + ". " + "<b>" + link + title + "</button></b>");
-                $(htmlTextID).append("<br>");
+                $(htmlTextId).append(position + ". " + "<b>" + link + title);
+                $(htmlTextId).append("<br>");
                 $(htmlTextId).append(creators + "<br>");
                 $(htmlImageId).append("<img src="+imgLink+"/full/full/0/default.jpg alt="+title+" style = 'width:75px' height=auto vspace= 5px>");
                 recolorMarker(item, id);
