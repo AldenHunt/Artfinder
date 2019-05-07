@@ -169,8 +169,16 @@ function locateByID(id) {
 
 // centers the map view on the object with the id in query string
 function locateOnMap() {
+    var objdata = JSON.parse(objects);
     var id = JSON.parse(obj_id);
-    locateByID(obj_id);
+    for (item in objdata) {
+        if (objdata[item]["objectid"] == id) {
+            mymap.flyTo(new L.LatLng(objdata[item]["lat"], objdata[item]["long"]), 18);
+            var marker = idMarkers.get(objdata[item]["objectid"]);
+            marker.openPopup();
+            return;
+        }
+    }
 }
 
 // expands or collapses (or does nothing to) the sidebar, depending on screen size
