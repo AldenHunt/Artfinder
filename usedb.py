@@ -122,7 +122,7 @@ def json_search(db_file, string):
 	key = '%' + string + '%'
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
-	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators, 'image', image)) AS json_result FROM (SELECT * FROM  objects WHERE title LIKE ? OR creators LIKE ? OR dates LIKE ? OR description LIKE ?)", (key, key, key, key,))
+	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators, 'image', image)) AS json_result FROM (SELECT * FROM  objects WHERE title LIKE ? OR creators LIKE ? OR dates LIKE ? OR description LIKE ?)", (key, key, key, key))
 	rows = cur.fetchall()
 	json_string = rows[0][0]
 	json_object = json.loads(json_string)

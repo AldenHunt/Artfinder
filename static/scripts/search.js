@@ -2,6 +2,9 @@
 
 function searchResults(){
     var objdata = JSON.parse(searchedObjects);
+    if (objdata.length == 0) {
+        $("#searchList").append("No search hits. Please note that art is searchable only by creator, title, material, date, and description.")
+    }
     for (item in objdata) {
         var element = document.createElement("div");
         element.className = "row"
