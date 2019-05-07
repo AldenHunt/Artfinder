@@ -1,3 +1,25 @@
+var autoplayIsOn = true; // true if carousel has autoplay
+var hasCarousel = false; // true if multiple imgs on page
+
+// if the carousel and the text are stacked atop one another, then turn off autoplay
+function adjustAutoplay() {
+    var windowWidth = window.innerWidth;
+    var imgWidth = document.getElementsByClassName("active")[1].offsetWidth;
+    // too small, turn it off
+    if (windowWidth - imgWidth < 50 && autoplayIsOn) {
+        console.log("autoplay turned off");
+        //$('.carousel').attr('data-ride', 'false');
+        $('.carousel').carousel('pause');
+        autoplayIsOn = false;
+    }
+    // big enough, turn it back on
+    else if (windowWidth - imgWidth > 50 && !autoplayIsOn) {
+        console.log("autoplay turned on");
+        $('.carousel').carousel('cyc');
+        autoplayIsOn = true;
+    }
+}
+
 function createMedia() {
     // parse out the JSON data
     var objdata = JSON.parse(objimg);
@@ -7,7 +29,7 @@ function createMedia() {
     if (images.length > 1) {
         // create a carousel frame element
         var carousel = strToDOMElement(carouselFrame());
-
+        hasCarousel = true;
         // add each image into the frame
         for (var i = 0; i < images.length; i++) {
             // add a slide indicator
@@ -67,3 +89,13 @@ var strToDOMElement = function(html) {
 }
 
 createMedia();
+
+// test autoplay on every resize
+window.onresize = function() {
+    if (hasCarousel) adjustAutoplay();
+};
+
+// test autoplay on page load
+window.onload = function() {
+    if (hasCarousel) adjustAutoplay();
+};
