@@ -11,6 +11,11 @@ var mymap = L.map('mapid', {maxBounds: bounds, minZoom: 15, maxZoom: 19}).setVie
 
 var idMarkers = new Map();
 
+// triggers the adjustSidebar function when the window is resized
+window.onresize = adjustSidebar;
+// will only adjust on resize if this is true
+var adjust = true;
+
 /* We're currently getting our tiles (the actual map rendering) from
 Mapbox. If this app ever gets big, we really should change providers
 or start paying somebody */
@@ -114,7 +119,7 @@ function sideBarNoLocation(){
 mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
 
-// changes the color of the icon based on the rank
+// changes the color of the icon based on the rank in the "nearest items" list
 function recolorMarker(rank, id) {
     var color;
     if (rank == 0) {
@@ -142,7 +147,14 @@ function recolorMarker(rank, id) {
 /* doesn't set the view if query string contains a valid id */
 mymap.locate({setView: false, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
 
+// centers the map view on the object with the given id
 function locateByID(id) {
+    // adjust sidebar and maintain value for "adjust"
+    var tmp = adjust;
+    adjust = true;
+    adjustSidebar();
+    adjust = tmp;
+    // zoom to and popup appropriate marker
     console.log("Called!");
     var objdata = JSON.parse(objects);
     for (item in objdata) {
@@ -154,17 +166,35 @@ function locateByID(id) {
         }
     }
 }
+
 // centers the map view on the object with the id in query string
 function locateOnMap() {
-    var objdata = JSON.parse(objects);
     var id = JSON.parse(obj_id);
-    for (item in objdata) {
-        if (objdata[item]["objectid"] == id) {
-            mymap.flyTo(new L.LatLng(objdata[item]["lat"], objdata[item]["long"]), 18);
-            var marker = idMarkers.get(objdata[item]["objectid"]);
-            marker.openPopup();
-            return;
-        }
+    locateByID(obj_id);
+}
+
+// expands or collapses (or does nothing to) the sidebar, depending on screen size
+function adjustSidebar() {
+    // collapse on these conditions
+    var nearest = document.getElementById("nearest");
+    if (window.innerWidth < 750 && nearest.classList.contains("show") && adjust) {
+        // do all the collapsing
+        console.log("collapse");
+        $('#nearest').hide();
+        $('#nearesttoggle').show();
+        $('#nearest').toggleClass('active');
+        $('#nearest').toggleClass('show');
+        document.getElementById("nearesttoggle").style.display = "block";
+    }
+    // expand on these conditions
+    else if (window.innerWidth >= 750 && !nearest.classList.contains("show") && adjust) {
+        // do all the expanding
+        console.log("expand");
+        $('#nearest').show();
+        $('#nearesttoggle').hide()
+        document.getElementById("nearesttoggle").style.display = "none";
+        $('#nearest').toggleClass('active');
+        $('#nearest').toggleClass('show');
     }
 }
 
@@ -173,7 +203,6 @@ function addMarkers(){
     /* objects is passed from server to map.html with jinja2. */
     var objdata = JSON.parse(objects);
     
-
     for (item in objdata) {
         // custom icon for map marker
         var customIcon = L.icon({
@@ -198,11 +227,13 @@ function addMarkers(){
 addMarkers();
 
 var nearestButton = document.getElementById("nearesttoggle")
-$('#nearesttoggle').hide()
+$('#nearesttoggle').hide();
 
 $('#dismiss').on("click", function() {
     $('#nearesttoggle').show()
     $('#nearest').toggleClass('active');
+    $('#nearest').hide();
+    adjust = false;
 })
 
 $('#dismiss').on('click', function() {
@@ -212,6 +243,8 @@ $('#dismiss').on('click', function() {
 $('#nearesttoggle').on('click', function() {
     nearestButton.style.display = "none"
     $('#nearest').toggleClass('active');
+    $('#nearest').show();
+    adjust = false;
 })
 
 
