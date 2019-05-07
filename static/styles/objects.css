@@ -8,6 +8,10 @@ body {
     font-family: 'Quicksand', sans-serif;
 }
 
+img { 
+    min-width: 200px;
+}
+
 h2 {
    color: whitesmoke; 
 }
@@ -20,6 +24,10 @@ h2 {
 .footer {
     background-color: darkgray;
     text-align: center;
+}
+
+.col {
+    min-width: 250px;
 }
 
 a {
