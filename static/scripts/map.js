@@ -170,6 +170,10 @@ function locateByID(id) {
 // centers the map view on the object with the id in query string
 function locateOnMap() {
     var objdata = JSON.parse(objects);
+    var tmp = adjust;
+    adjust = true;
+    adjustSidebar();
+    adjust = tmp;
     var id = JSON.parse(obj_id);
     for (item in objdata) {
         if (objdata[item]["objectid"] == id) {
