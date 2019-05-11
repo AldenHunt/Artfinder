@@ -51,25 +51,6 @@ def dist_ltf(lat, long, rlat, rlong):
 	dist = math.sqrt(((lat - rlat)*lat2ft)**2 + ((long - rlong)*long2ft)**2)
 	return dist
 	
-def display_by_radius(db_file, lat, long, radius):
-	''' Returns a list of objects from database db_file within a radius of radius centered on lat long.'''
-	conn = sqlite3.connect(db_file)
-	cur = conn.cursor()
-	cur.execute("SELECT * FROM objects")
-	rows = cur.fetchall()
-	r = {}
-	results = []
-	i = 0
-	for row in rows:
-		rlat = float(row[8])
-		rlong = float(row[9])
-		dist = dist_ltf(lat, long, rlat, rlong)
-		if dist <= radius:
-			r = dict((cur.description[i][0], val) for i, val in enumerate(row));
-			results.append(r);
-	conn.close()
-	results = json.dumps(results)
-	return results
 
 def display_objects_location(db_file, lat, long, n):
 	''' Returns a list of n objects from database db_file centered on lat long.'''
