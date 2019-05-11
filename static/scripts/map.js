@@ -34,6 +34,14 @@ function onLocationFound(e) {
     if (radius > 175) {
         console.log("Location may not be accurate on devices without GPS functionality");
     }
+
+    if (!bounds.contains(e.latlng)) {
+        var offCampus = "Off campus? Here are objects close to the Princeton University Art Museum";
+        sideBarNoLocation(offCampus);
+        sideBarNoLocation();
+        locateOnMap();
+        return;
+    }
         L.circle(e.latlng, radius).addTo(mymap);
         var data = {
             lat: e.latlng.lat.toString(),
@@ -76,12 +84,13 @@ function onLocationFound(e) {
 function onLocationError(e) {
     console.log("Error: Location failed");
     //default to location of Princeton University Art Museum
-    sideBarNoLocation();
+    var locFail = "We can't find your exact location. Here are objects close to the Princeton University Art Museum";
+    sideBarNoLocation(locFail);
     locateOnMap();
 }
 
 // Populates side bar if no location services or error in location services, using art museum as default location
-function sideBarNoLocation(){
+function sideBarNoLocation(headText){
     mymap.flyTo([defaultLat, defaultLng], 18);
     var data = {
         lat: defaultLat.toString(),
@@ -93,7 +102,7 @@ function sideBarNoLocation(){
         data: data,
         success: function(data){
             data = JSON.parse(data)
-            $('#locationHeader').html('We can\'t find your exact location. Here are objects close to the Princeton University Art Museum');
+            $('#locationHeader').html(headText);
             for (item in data) {
                 var title = data[item]["title"];
                 var creators = data[item]["creators"];
