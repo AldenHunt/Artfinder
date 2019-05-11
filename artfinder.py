@@ -28,6 +28,8 @@ def map():
 def search():
     if request.method == 'POST':
         searchString = request.form.get('search')
+        if (searchString == ''):
+            return redirect(url_for('map'));
         searchedObjects = usedb.json_search('artobjects.db', searchString)
         return render_template('search.html', searchedObjects = searchedObjects, searchString = searchString)
     else:
