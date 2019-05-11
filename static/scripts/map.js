@@ -38,7 +38,6 @@ function onLocationFound(e) {
     if (!bounds.contains(e.latlng)) {
         var offCampus = "Off campus? Here are objects close to the Princeton University Art Museum";
         sideBarNoLocation(offCampus);
-        sideBarNoLocation();
         locateOnMap();
         return;
     }
