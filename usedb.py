@@ -113,11 +113,4 @@ def json_search(db_file, string):
 	conn.close()
 	return json_object
 	
-# def json_search(db_file, string):
-	#hits = objects_search(db_file, string)
-	#result = [];
-	#for objid in hits:
-		#print(hits[0][0])
-		#result += json_object_data(db_file, hits[0][0])
-	#return json.dumps(result) 
 	
