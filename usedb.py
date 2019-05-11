@@ -4,22 +4,6 @@
 # Rhea Braun, Sadie Van Vranken
 import sqlite3, json, math, operator
 
-def display_objects_table(db_file):
-	''' Displays all objects in the objects table of the db in the argument, printing them out and returning them as a list of lists.'''
-	conn = sqlite3.connect(db_file)
-	cur = conn.cursor()
-	cur.execute("SELECT * FROM objects")
-	r = {};
-	list = [];
-	for row in cur.fetchall():
-		r = dict((cur.description[i][0], val) for i, val in enumerate(row));
-		list.append(r);
-	#for row in rows:
-		#print(row)
-	conn.close()
-	list = json.dumps(list)
-	return list
-	
 def display_object_data(db_file, objectid):
 	''' Returns an object with objectid as its object id from database db_file.'''
 	conn = sqlite3.connect(db_file)
