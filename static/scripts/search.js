@@ -22,10 +22,8 @@ function searchResults(){
         element.appendChild(picCol);
         
         var id = objdata[item]["objectid"]
-        var lat = objdata[item]["lat"];
-        var lng = objdata[item]["long"];
         var sepEntries = document.createElement("hr")
-        console.log(lng);
+    
 
         link = "objects/" + id
         buttonMap.href = "map?id=" + id;
