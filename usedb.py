@@ -5,7 +5,7 @@
 import sqlite3, json, math, operator
 
 def display_object_data(db_file, objectid):
-	''' Returns an object with objectid as its object id from database db_file.'''
+	#Returns an object with objectid as its object id from database db_file.
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects WHERE objectid=?", (objectid,))
@@ -15,7 +15,7 @@ def display_object_data(db_file, objectid):
 	return row
 
 def json_object_data(db_file, objectid):
-	''' Returns an object with objectid as its object id from database db_file in json format.'''
+	#Returns an object with objectid as its object id from database db_file in json format.
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT json_object('objectid', objectid, 'lat', lat, 'long', long) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
@@ -25,7 +25,7 @@ def json_object_data(db_file, objectid):
 	return json_row
 
 def json_object_img(db_file, objectid):
-	''' Returns the image of the object with objectid as its object id from database db_file in json format.'''
+	#Returns the image of the object with objectid as its object id from database db_file in json format.
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT json_object('image', image) AS json_result FROM (SELECT * FROM objects WHERE objectid=?)", (objectid,))
@@ -35,7 +35,7 @@ def json_object_img(db_file, objectid):
 	return json_row
 
 def json_objects_table(db_file):
-	''' Displays all objects in the objects table of the db in the argument, printing them out and returning them as a list of lists.'''
+	#Displays all objects in the objects table of the db in the argument, printing them out and returning them as a list of lists.
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT json_group_array(json_object('objectid', objectid, 'lat', lat, 'long', long, 'title', title, 'creators', creators, 'image', image)) AS json_result FROM (SELECT * FROM objects)")
@@ -53,7 +53,7 @@ def dist_ltf(lat, long, rlat, rlong):
 	
 
 def display_objects_location(db_file, lat, long, n):
-	''' Returns a list of n objects from database db_file centered on lat long.'''
+	#Returns a list of n objects from database db_file centered on lat long.
 	conn = sqlite3.connect(db_file)
 	cur = conn.cursor()
 	cur.execute("SELECT * FROM objects")
