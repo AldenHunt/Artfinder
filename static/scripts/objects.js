@@ -8,14 +8,17 @@ function adjustAutoplay() {
     // too small, turn it off
     if (windowWidth - imgWidth < 50 && autoplayIsOn) {
         console.log("autoplay turned off");
-        //$('.carousel').attr('data-ride', 'false');
-        $('.carousel').carousel('pause');
+        $(document).ready(function() {      
+            $('.carousel').carousel('pause');
+         });
         autoplayIsOn = false;
     }
     // big enough, turn it back on
     else if (windowWidth - imgWidth > 50 && !autoplayIsOn) {
         console.log("autoplay turned on");
-        $('.carousel').carousel('cyc');
+        $(document).ready(function() {      
+            $('.carousel').carousel('cycle');
+         });
         autoplayIsOn = true;
     }
 }
