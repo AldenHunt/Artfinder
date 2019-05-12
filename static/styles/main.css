@@ -2,10 +2,11 @@ body {
     background-color: #fff8ee;
     text-align: center;
     background-image: url("http://princetonfound.com/wp-content/uploads/2015/11/IMG_0484.jpg");
-  height: 100vh; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
+    /* Pulled this code to make a background image fill the frame from StackOverflow */
+    height: 100vh; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
     }
 #splash {
     justify-content: center;
