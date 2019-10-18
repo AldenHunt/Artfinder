@@ -153,7 +153,7 @@ function recolorMarker(rank, id) {
 
 /* Automatically locates the user and sets the view to their location) */
 /* doesn't set the view if query string contains a valid id */
-mymap.locate({setView: false, timeout: 5000, maximumAge: 30000, enableHighAccuracy: true});
+mymap.locate({setView: false, timeout: 5000, maximumAge: 3000, enableHighAccuracy: true});
 
 // centers the map view on the object with the given id
 function locateByID(id) {
